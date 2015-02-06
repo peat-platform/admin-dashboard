@@ -18,20 +18,24 @@ function crud(method, uri, body, authorization, cb)
 	});
 }
 
+/* this endpoint is not supported anymore
 function listAuthorizations(session)
 {
 	crud('GET', base + '/authorizations', null, session, cb);
 }
+*/
 
-function createAuthorization(session, id, cb)
+function createAuthorization(cb)
 {
-	crud('POST', base + '/authorizations/' + id, null, session, cb);
+	crud('POST', base + '/authorizations', {'username': username, 'password': password, 'api_key': apiKey, 'secret': secret}, null, cb);
 }
 
+/* this endpoint is not supported anymore
 function deleteAuthorization(session, id, cb)
 {
 	crud('DELETE', base + '/authorizations/' + id, null, session, cb);
 }
+*/
 
 function createClient(client, secret, cb)
 {
