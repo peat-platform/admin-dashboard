@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	p Welcome to #{title}
+	p <--- Register --->
+	include ./register.jade
+	p <--- Login --->
+	include ./login.jade
+	p <--- Logout --->
+	include ./logout.jade
+	p <--- Register Client --->
+	include ./registerClient.jade
+	p <--- List Apps (Logged in) --->
+	a(href="/apps") MyApps

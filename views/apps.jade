@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	p <--- Authorize Apps --->
+	each d in data
+		p #{d.username} #{d.client} #{d.meta.id}
+	p <--- Authorize --->
+	include ./authorize.jade
+	p <--- Deauthorize --->
+	include ./deauthorize.jade
