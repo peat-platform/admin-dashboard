@@ -1,14 +1,16 @@
 extends layout
 
+block header
+	include ./header-navbar.jade
+
 block content
+	p <--- Welcome --->
 	p Welcome to #{title}
-	p <--- Register --->
-	include ./register.jade
-	p <--- Login --->
-	include ./login.jade
 	p <--- Logout --->
 	include ./logout.jade
 	p <--- Register Client --->
 	include ./registerClient.jade
+	p <--- Cloudlets --->
+	a(href="/cloudlets") Cloudlets
 	p <--- List Apps (Logged in) --->
 	a(href="/apps") MyApps

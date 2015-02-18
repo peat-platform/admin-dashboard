@@ -1,6 +1,6 @@
 var request = require('request');
 
-//var base = 'https://' + '127.0.0.1' + ':443/api/v1';
+// var base = 'https://' + '127.0.0.1' + ':443/api/v1';
 //var base = 'https://demo2.openi-ict.eu:443/api/v1';
 var host = 'https://demo2.openi-ict.eu';
 var base = '/api/v1';
@@ -54,16 +54,14 @@ function crud(method, uri, body, authorization, cb)
 	req.end();
 }
 
-function getCloudlets(session, cb)
+function search(with_property, property_filter, type, id_only, offset, limit, session, cb)
 {
-	crud('GET', base + '/cloudlets', null, session, cb);
+	crud('GET', base + '/search?with_property='+with_property
+						+'&property_filter='+property_filter
+						+'&type='+type+'&id_only='+id_only
+						+'&offset='+offset+'&limit='+limit, null, session, cb);
 }
 
-function getAllCloudlets(offset, limit, cb)
-{
-	crud('GET', base + '/cloudlets/all?offset='+offset+'&limit='+limit, null, cb);
-}
 
-module.exports.getCloudlets = getCloudlets;
-module.exports.getAllCloudlets = getAllCloudlets;
+module.exports.search = search;
 module.exports.base = base;

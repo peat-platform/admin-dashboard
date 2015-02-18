@@ -15,7 +15,7 @@ crud.base = 'https://' + ip.address() + ':443/api/v1/crud';
 var auth = require('./libs/auth');
 auth.base = 'https://' + ip.address() + ':443/api/v1/auth';
 
-var routes = require('./routes/index');
+var dashboard = require('./routes/index');
 
 var register = require('./routes/register');
 var login = require('./routes/login');
@@ -26,6 +26,8 @@ var deauthorize = require('./routes/deauthorize');
 var registerClient = require('./routes/registerClient');
 
 var apps = require('./routes/apps');
+var cloudlets = require('./routes/cloudlets');
+var search = require('./routes/search');
 
 var app = express();
 
@@ -51,7 +53,7 @@ app.use(cookieParser('4e3d00e7-7fc4-480f-b785-bafebbdcb74f'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/', login);
 
 //app.use('/users', users);
 
@@ -59,11 +61,15 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/logout', logout);
 
-app.use('/authorize', authorize);
-app.use('/deauthorize', deauthorize);
-app.use('/registerClient', registerClient);
+app.use('/dashboard', dashboard);
 
-app.use('/apps', apps);
+app.use('/dashboard/authorize', authorize);
+app.use('/dashboard/deauthorize', deauthorize);
+app.use('/dashboard/registerClient', registerClient);
+
+app.use('/dashboard/apps', apps);
+app.use('/dashboard/cloudlets', cloudlets);
+app.use('/dashboard/search', search);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

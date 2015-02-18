@@ -17,28 +17,16 @@ html(lang="en")
 		<!-- Placed at the end of the document so the pages load faster -->
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
 		script(src="/javascripts/bootstrap.min.js")
-		script(src="/javascripts/docs.min.js")
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		script(src="/javascripts/ie10-viewport-bug-workaround.js")
 
 	body
 		header
-			nav(class="navbar navbar-inverse navbar-fixed-top")
-				.container-fluid
-				.navbar-header
-					button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar")
-						span.sr-only Toggle navigation
-						span.icon-bar
-						span.icon-bar
-						span.icon-bar
-					a.navbar-brand(href="#") OpenI Dashboard
-				#navbar(class=['navbar-collapse', 'collapse'])
-			p <--------->
+			block header
+			<!--  place the Header here  -->
 		section
 			block content
+			<!--  place the Content here  -->
 		footer
-			p <--------->
-
-
-
-
+			block footer
+			<!--  place the Footer here  -->
