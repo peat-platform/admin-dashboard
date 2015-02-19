@@ -3,14 +3,18 @@ extends layout
 block header
 	include ./header-navbar.jade
 
+block sidebar
+	include ./sidebar-menu.jade
+
 block content
-	p <--- Welcome --->
-	p Welcome to #{title}
-	p <--- Logout --->
-	include ./logout.jade
-	p <--- Register Client --->
-	include ./registerClient.jade
-	p <--- Cloudlets --->
-	a(href="/cloudlets") Cloudlets
-	p <--- List Apps (Logged in) --->
-	a(href="/apps") MyApps
+	.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+		p <--- Welcome --->
+		p Welcome to #{title}
+		p <--- Logout --->
+		include ./logout.jade
+		p <--- Register Client --->
+		include ./registerClient.jade
+		p <--- Cloudlets --->
+		a(href="/cloudlets") Cloudlets
+		p <--- List Apps (Logged in) --->
+		a(href="/apps") MyApps

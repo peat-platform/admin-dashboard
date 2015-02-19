@@ -4,7 +4,7 @@ html(lang="en")
 		meta(charset="utf-8")
 		meta(http-equiv="X-UA-Compatible" content="IE=edge")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
-		meta(name="Fraunhofer FOKUS - Sebastian Schmidt" content="OpenI-Dashboard")
+		meta(name="Fraunhofer FOKUS - FAME" content="OpenI-Dashboard")
 
 		title= "OpenI Dashboard"
 		link(rel='stylesheet', href='/stylesheets/style.css')
@@ -22,11 +22,16 @@ html(lang="en")
 
 	body
 		header
-			block header
 			<!--  place the Header here  -->
+			block header			
 		section
-			block content
-			<!--  place the Content here  -->
+			.container-fluid
+				.row
+					<!--  place the Sidebar here  -->
+					block sidebar
+					<!--  place the Content here  -->
+					block content			
 		footer
-			block footer
 			<!--  place the Footer here  -->
+			block footer
+			

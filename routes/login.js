@@ -9,6 +9,16 @@ router.get('/', function(req, res)
 {
   console.log('\nGET LOGIN PAGE!\n');
   res.render('login');
+
+  /*var client = require("swagger-client")
+
+  var swagger = new client.SwaggerClient({
+    url: 'https://demo2.openi-ict.eu/api-spec/v1/simple_auth.json',
+    success: function() {
+      console.log( swagger.apis() );
+    }
+  });*/
+
 });
 
 router.post('/', function(req, res)
