@@ -6,16 +6,14 @@ nav.navbar.navbar-inverse.navbar-fixed-top
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='/') Project name
+          a.navbar-brand(href='/') OPENI DASHBOARD
         #navbar.navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
             li
-              a(href='') Dashboard
+              a(href='/settings') Settings
             li
-              a(href='') Settings
+              a(href='/profile') Profile
             li
-              a(href='') Profile
-            li
-              a(href='') Help
-          form.navbar-form.navbar-right
+              a(href='/logout') Logout
+          form.navbar-form.navbar-right(id="search", name="search", method="GET", action="/search")
             input.form-control(type='text', placeholder='Search...')

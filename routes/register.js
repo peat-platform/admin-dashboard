@@ -3,12 +3,13 @@ var auth = require('../libs/auth');
 var express = require('express');
 var router = express.Router();
 
+// GET route to get the register site
 router.get('/', function(req, res)
 {
-  console.log('\nGET REGISTER PAGE!\n');
   res.render('register');
 });
 
+// POST route to register
 router.post('/', function(req, res)
 {
   if(!req.body.username || !req.body.password)

@@ -3,17 +3,24 @@ var auth = require('../libs/auth');
 var express = require('express');
 var router = express.Router();
 
+router.get('/', function(req, res){
+  res.render('registerClient');
+});
+
 router.post('/', function(req, res)
 {
-  if(!req.body.client || !req.body.secret)
+  if(!req.body.clientname || !req.body.cdescription)
   {
     res.redirect('/');
     return;
   }
   console.log(req.body);
-  auth.createClient(req.body.client, req.body.secret, function(err, body)
+  auth.createClient(req.body.clientname, req.body.cdescription, req.signedCookies.session, function(err, body)
   {
-    res.redirect('/');
+    res.cookie('cloudlet', body.cloudlet, {signed: true});
+    res.cookie('api_key', body.api_key, {signed: true});
+    res.cookie('secret', body.secret, {signed: true});
+    res.redirect('/dashboard');
   });
 });
 

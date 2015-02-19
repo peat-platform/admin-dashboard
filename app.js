@@ -15,7 +15,7 @@ crud.base = 'https://' + ip.address() + ':443/api/v1/crud';
 var auth = require('./libs/auth');
 auth.base = 'https://' + ip.address() + ':443/api/v1/auth';
 
-var dashboard = require('./routes/index');
+var index = require('./routes/index');
 
 var register = require('./routes/register');
 var login = require('./routes/login');
@@ -53,6 +53,17 @@ app.use(cookieParser('4e3d00e7-7fc4-480f-b785-bafebbdcb74f'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Authentification check
+app.use('/dashboard', function(req, res, next){
+  if(req.signedCookies.session) {
+    console.log('AuthCheck passed!');
+    next();
+  } else { 
+    console.log('AuthCheck FAILED!');
+    res.redirect('/');
+  }
+});
+
 app.use('/', login);
 
 //app.use('/users', users);
@@ -61,7 +72,7 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/logout', logout);
 
-app.use('/dashboard', dashboard);
+app.use('/dashboard', index);
 
 app.use('/dashboard/authorize', authorize);
 app.use('/dashboard/deauthorize', deauthorize);
