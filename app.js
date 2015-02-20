@@ -4,31 +4,30 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-//var session = require('express-session')
 
-var request = require('request');
-var ip = require('ip');
-
-var crud = require('./libs/crud');
-crud.base = 'https://' + ip.address() + ':443/api/v1/crud';
-
-var auth = require('./libs/auth');
-auth.base = 'https://' + ip.address() + ':443/api/v1/auth';
-
+/*****************************
+*       IMPLEMENT ROUTES     *
+*****************************/
+// Overview Dashboard
 var index = require('./routes/index');
 
+// Simple_Auth
 var register = require('./routes/register');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
-
 var authorize = require('./routes/authorize');
 var deauthorize = require('./routes/deauthorize');
 var registerClient = require('./routes/registerClient');
 
+// 
 var apps = require('./routes/apps');
 var cloudlets = require('./routes/cloudlets');
 var search = require('./routes/search');
 
+
+/*****************************
+*        INITIALIZE APP      *
+*****************************/
 var app = express();
 
 // view engine setup

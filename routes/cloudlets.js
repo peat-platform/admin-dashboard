@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.get('/', function(req, res)
 {
-if(!req.cookies.session)
+if(!req.signedCookies.session)
   {
     res.redirect('/');
     return;
@@ -19,7 +19,7 @@ if(!req.cookies.session)
       res.redirect('/');
       return;
     }
-    res.cookie('cloudletID', body['@id'], {signed: true});
+    //res.cookie('cloudletID', body['@id'], {signed: true});
     res.render('cloudlets');
   });
 });

@@ -1,10 +1,22 @@
 extends layout
 
+block header
+	include ./header-navbar.jade
+
+block sidebar
+	include ./sidebar-menu.jade
+
 block content
-	p <--- Authorize Apps --->
-	each d in data
-		p #{d.username} #{d.client} #{d.meta.id}
-	p <--- Authorize --->
-	include ./authorize.jade
-	p <--- Deauthorize --->
-	include ./deauthorize.jade
+	.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+		p <--- Authorize Apps --->
+		- var data = [];
+		if data.username
+			each d in data
+				p #{d.username} #{d.client} #{d.meta.id}
+		else 
+			p
+				i no apps yet
+		p <--- Authorize --->
+		include ./authorize.jade
+		p <--- Deauthorize --->
+		include ./deauthorize.jade

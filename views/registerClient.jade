@@ -1,24 +1,21 @@
 extends layout
 
+block header
+	include ./header-navbar.jade
+
+block sidebar
+	include ./sidebar-menu.jade
+
 block content
-	#login-overlay.modal-dialog.navbar-left
-		.modal-content
-			.modal-header
-				button.close(type="button", data-dismiss="modal")
-					span(aria-hidden="true") ×
-					span.sr-only Close
-				h4.modal-title(id=myModalLabel) Register a Client to OpenI
-			.modal-body
-				.row
-					.well
-						form(id="registerClient", name="registerClient" method="POST", action="dashboard/registerClient", novalidate="novalidate")
-							.form-group
-								label(for="clientname", class="control-label") Clientname
-								input(type="text", class="form-control", id="clientname", name="clientname", value="", required="", title="Please enter a clientname", placeholder="OPENI_Android")
-								span.help-block
-							.form-group
-								label(for="cdescription", class="control-label") Description
-								textarea(rows=3, cols=80, class="form-control", id="cdescription", name="cdescription", value="", required="", title="Please enter a client description", style="resize:vertical; max-height:300px; min-height:100px;", placeholder="A OPENI Android application.")
-								span.help-block
-							#loginErrorMsg.alert.alert-error.hide Error during Client registration
-							button(type="submit", class="btn btn-success btn-block") Register Client
+	.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+		form(id="registerClient", name="registerClient" method="POST", action="dashboard/registerClient", novalidate="novalidate")
+			.form-group
+				label(for="clientname", class="control-label") Clientname
+				input(type="text", class="form-control", id="clientname", name="clientname", value="", required="", title="Please enter a clientname", placeholder="OPENI_Android")
+				span.help-block
+			.form-group
+				label(for="cdescription", class="control-label") Description
+				textarea(rows=3, cols=80, class="form-control", id="cdescription", name="cdescription", value="", required="", title="Please enter a client description", style="resize:vertical; max-height:300px; min-height:100px;", placeholder="A OPENI Android application.")
+				span.help-block
+			#loginErrorMsg.alert.alert-error.hide Error during Client registration
+			button(type="submit", class="btn btn-success btn-block") Register Client

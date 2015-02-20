@@ -14,7 +14,6 @@ router.post('/', function(req, res)
     res.redirect('/');
     return;
   }
-  console.log(req.body);
   auth.createClient(req.body.clientname, req.body.cdescription, req.signedCookies.session, function(err, body)
   {
     res.cookie('cloudlet', body.cloudlet, {signed: true});
