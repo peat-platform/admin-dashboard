@@ -17,7 +17,7 @@ router.get('/', function(req, res)
   {
     console.log(e);
     //res.render('error', {'message': 'Authorization invalid', 'error': {'stack': '', 'status': ''}});
-    res.redirect('/');
+    res.redirect(400,'/');
     return;
   }
 
@@ -25,7 +25,8 @@ router.get('/', function(req, res)
   crud.query('SELECT meta() as meta, * FROM authorizations WHERE username = \'' + verified.user_id + '\';', function(err, body)
   {
     if(err)
-      res.redirect('/');
+      res.redirect(400,'/dashboard');
+    console.log("show authorizations -> "+body);
     res.render('apps', {'data': body});
   });
 });

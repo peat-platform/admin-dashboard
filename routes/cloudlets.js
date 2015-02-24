@@ -8,6 +8,7 @@ router.get('/', function(req, res)
 {
 if(!req.signedCookies.session)
   {
+    res.clearCookie('session');
     res.redirect('/');
     return;
   }
@@ -16,10 +17,12 @@ if(!req.signedCookies.session)
   {
     if(err)
     {
-      res.redirect('/');
+      console.error(err);
+      res.redirect(400,'/dashboard/cloudlets');
       return;
     }
-    //res.cookie('cloudletID', body['@id'], {signed: true});
+    body = JSON.parse(body);
+    res.cookie('cloudletID', body['@id'] , {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
     res.render('cloudlets');
   });
 });

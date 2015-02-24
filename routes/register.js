@@ -14,7 +14,7 @@ router.post('/', function(req, res)
 {
   if(!req.body.username || !req.body.password)
   {
-    res.redirect('/');
+    res.redirect(400,'/');
     //res.send('respond with a resource');
     return;
   }
@@ -24,7 +24,7 @@ router.post('/', function(req, res)
     if(err)
     {
       console.error(err);
-      res.redirect('/');
+      res.redirect(400,'/');
       return;
     }
 
@@ -33,10 +33,10 @@ router.post('/', function(req, res)
       if(err)
       {
         console.error(err);
-        res.redirect('/');
+        res.redirect(400,'/');
         return;
       }
-      res.cookie('session', body.session, {signed: true});
+      res.cookie('session', body.session, {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
       res.redirect('/dashboard');
     });
   });

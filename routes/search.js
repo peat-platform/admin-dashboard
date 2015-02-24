@@ -16,7 +16,7 @@ if(!req.cookies.session)
   {
     if(err)
     {
-      res.redirect('/');
+      res.redirect(400,'/');
       return;
     }
     res.render('search');

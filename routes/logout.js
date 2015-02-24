@@ -15,10 +15,19 @@ router.post('/', function(req, res)
   {
     if(err)
     {
+      res.clearCookie('session');
+      res.clearCookie('api_key');
+      res.clearCookie('cloudlet');
+      res.clearCookie('cloudletID');
+      res.clearCookie('secret');
       res.redirect('/');
       return;
     }
     res.clearCookie('session');
+    res.clearCookie('api_key');
+    res.clearCookie('cloudlet');
+    res.clearCookie('cloudletID');
+    res.clearCookie('secret');
     res.redirect('/');
   });
 });
