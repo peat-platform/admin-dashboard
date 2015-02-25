@@ -21,6 +21,7 @@ router.get('/', function(req, res)
     return;
   }
 
+  // approach from Johannes to get authorized apps ?
   // or use auth.listAuthorizations(session) / for show crud here
   crud.query('SELECT meta() as meta, * FROM authorizations WHERE username = \'' + verified.user_id + '\';', function(err, body)
   {

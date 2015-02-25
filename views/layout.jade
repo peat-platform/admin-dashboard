@@ -12,13 +12,7 @@ html(lang="en")
 		link(rel='stylesheet', href='/stylesheets/dashboard.css')
 		link(rel="icon" href="/favicon.ico" type="image/x-icon")
 		link(rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
-
-		<!-- Bootstrap core JavaScript ================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-		script(src="/javascripts/bootstrap.min.js")
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		script(src="/javascripts/ie10-viewport-bug-workaround.js")
+		link(href='/stylesheets/jquery-ui.min.css', rel='stylesheet', media='screen')
 
 	body
 		header
@@ -27,6 +21,12 @@ html(lang="en")
 		section
 			.container-fluid
 				.row
+					#notifications
+					#logout-confirm-dialog.hide
+						form.form-horizontal
+							#logout-confirm-dialog-text(style='text-align: center; padding-top: 30px;')
+								p Are you sure you want to logout?
+
 					<!--  place the Sidebar here  -->
 					block sidebar
 					<!--  place the Content here  -->
@@ -35,3 +35,13 @@ html(lang="en")
 			<!--  place the Footer here  -->
 			block footer
 			
+		<!-- Bootstrap core JavaScript ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+		script(src="/javascripts/bootstrap.min.js")
+		script(src="/javascripts/jquery-ui.min.js")
+		script(src="/javascripts/main.js")
+		script(src="/javascripts/ui/notifications.js")
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		script(src="/javascripts/ie10-viewport-bug-workaround.js")
+

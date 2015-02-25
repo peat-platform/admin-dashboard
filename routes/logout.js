@@ -15,19 +15,19 @@ router.post('/', function(req, res)
   {
     if(err)
     {
-      res.clearCookie('session');
-      res.clearCookie('api_key');
-      res.clearCookie('cloudlet');
-      res.clearCookie('cloudletID');
-      res.clearCookie('secret');
+      res.clearCookie('session', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
+      res.clearCookie('api_key', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
+      res.clearCookie('cloudlet', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
+      res.clearCookie('cloudletID', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
+      res.clearCookie('secret', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
       res.redirect('/');
       return;
     }
-    res.clearCookie('session');
-    res.clearCookie('api_key');
-    res.clearCookie('cloudlet');
-    res.clearCookie('cloudletID');
-    res.clearCookie('secret');
+    res.clearCookie('session', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
+    res.clearCookie('api_key', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
+    res.clearCookie('cloudlet', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
+    res.clearCookie('cloudletID', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
+    res.clearCookie('secret', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
     res.redirect('/');
   });
 });

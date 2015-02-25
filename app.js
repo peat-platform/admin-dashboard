@@ -55,10 +55,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Authentification check
 app.use('/dashboard', function(req, res, next){
   if(req.signedCookies.session) {
-    console.log('AuthCheck passed!');
     next();
   } else { 
-    console.log('AuthCheck FAILED!');
     res.redirect('/');
   }
 });
