@@ -1,9 +1,19 @@
 #!/usr/bin/env node
-var debug = require('debug')('openi-ui');
-var app = require('../app');
+var debug  = require('debug')('openi-ui');
+var app    = require('../app');
+var app_2  = require('../app');
+var http   = require('http');
+var m2node = require('m2node');
 
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
+
+
+m2node.run(
+   http.createServer(app_2), {
+      send_spec: 'tcp://127.0.0.1:49922',
+      recv_spec: 'tcp://127.0.0.1:49921'
+   });

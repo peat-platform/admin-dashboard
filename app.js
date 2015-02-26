@@ -1,9 +1,16 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+var express      = require('express');
+var path         = require('path');
+var favicon      = require('serve-favicon');
+var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var bodyParser   = require('body-parser');
+
+var config = {
+   trusted_public_key: '-----BEGIN PUBLIC KEY-----\n'+
+   'MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKT8kGk6ZNo3sC4IIo29leRLVD23T2r0\n'+
+   'vWXBEkk2pV42HsxKAmPs789AGHH9XwbGpD7FvrcBWWgb65v32Hg/NGkCAwEAAQ==\n'+
+   '-----END PUBLIC KEY-----'
+}
 
 /*****************************
 *       IMPLEMENT ROUTES     *
@@ -12,17 +19,11 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 
 // Simple_Auth
-var register = require('./routes/register');
-var login = require('./routes/login');
-var logout = require('./routes/logout');
-var authorize = require('./routes/authorize');
-var deauthorize = require('./routes/deauthorize');
+var register       = require('./routes/register');
+var login          = require('./routes/login');
+var logout         = require('./routes/logout');
 var registerClient = require('./routes/registerClient');
-
-// 
-var apps = require('./routes/apps');
-var cloudlets = require('./routes/cloudlets');
-var search = require('./routes/search');
+var apps           = require('./routes/apps');
 
 
 /*****************************
@@ -53,31 +54,36 @@ app.use(cookieParser('4e3d00e7-7fc4-480f-b785-bafebbdcb74f'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Authentification check
-app.use('/dashboard', function(req, res, next){
-  if(req.signedCookies.session) {
+app.use('/admin', function(req, res, next){
+   console.log(req.path)
+  if(req.signedCookies.session || req.path === '/login') {
     next();
-  } else { 
-    res.redirect('/');
+  } else {
+    res.redirect('/admin/login');
   }
 });
 
 app.use('/', login);
 
-//app.use('/users', users);
+app.use('/admin/register',             register);
+app.use('/admin',                      index(config));
+app.use('/admin/login',                login);
+app.use('/login',                      login);
+app.use('/admin/logout',               logout);
+app.use('/admin/dashboard',            index(config));
+app.use('/admin/registerClient',       registerClient);
+app.use('/admin/apps',                 apps);
 
-app.use('/register', register);
-app.use('/login', login);
-app.use('/logout', logout);
 
-app.use('/dashboard', index);
-
-app.use('/dashboard/authorize', authorize);
-app.use('/dashboard/deauthorize', deauthorize);
-app.use('/dashboard/registerClient', registerClient);
-
-app.use('/dashboard/apps', apps);
-app.use('/dashboard/cloudlets', cloudlets);
-app.use('/dashboard/search', search);
+//app.use('/register', register);
+//app.use('/login', login);
+//app.use('/logout', logout);
+//
+//app.use('/dashboard', index);
+//
+//app.use('/dashboard/registerClient', registerClient);
+//
+//app.use('/dashboard/apps', apps);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -6,14 +6,14 @@ nav.navbar.navbar-inverse.navbar-fixed-top
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='/dashboard') OPENI DASHBOARD PROTOTYPE
+          a.navbar-brand(href='/admin') OPENI DASHBOARD PROTOTYPE: #{user}
         #navbar.navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
             li
-              a(href='/dashboard/settings') Settings
+              a(href='/admin/settings') Settings
             li
-              a(href='/dashboard/profile') Profile
+              a(href='/admin/profile') Profile
             li
-              a(id="btn-logout-nav", href='/#') Logout
-          form.navbar-form.navbar-right(id="search", name="search", method="GET", action="/dashboard/search")
+              a(id="btn-logout-nav", href='/') Logout
+          form.navbar-form.navbar-right(id="search", name="search", method="GET", action="/admin/search")
             input.form-control(type='text', placeholder='Search...')

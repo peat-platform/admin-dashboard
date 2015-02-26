@@ -36,8 +36,8 @@ router.post('/', function(req, res)
         res.redirect(400,'/');
         return;
       }
-      res.cookie('session', body.session, {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
-      res.redirect('/dashboard');
+      res.cookie('session', body.session, {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
+      res.redirect('/admin');
     });
   });
 });

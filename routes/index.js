@@ -1,14 +1,29 @@
 var express = require('express');
-var router = express.Router();
+var jwt     = require('jsonwebtoken')
 
-/* GET home page. */
-router.get('/', function(req, res) {
-	//console.log('is logged in:' + JSON.stringify(req.signedCookies.session));
-	
-	// check for logged in
-	/*if(req.signedCookies.session) res.render('index', { title: 'OPENi-Dashboard' });
-	else res.render('login');*/
-	res.render('index', { title: 'OPENi-Dashboard' });
-});
+module.exports = function(config) {
 
-module.exports = router;
+   var router = express.Router();
+
+   /* GET home page. */
+   router.get('/', function (req, res) {
+
+      jwt.verify(req.signedCookies.session, config.trusted_public_key, function (err, decoded) {
+
+         if (err) {
+            res.render('/admin/login')
+         }
+         else {
+            res.render('index', {
+               title    : 'OPENi-Dashboard',
+               token    : req.signedCookies.session.substring(0, 100) + "...",
+               user     : decoded.user_id,
+               cloudlet : decoded.cloudlet
+            });
+         }
+      });
+
+   });
+
+   return router
+}

@@ -10,7 +10,7 @@
 var client = require("swagger-client")
 
 var swagger = new client.SwaggerClient({
-url: 'https://demo2.openi-ict.eu/api-spec/v1/simple_auth',
+url: 'https://localhost/api-spec/v1/simple_auth',
 success: function() {
   console.log( 'swagger works!' );
 },

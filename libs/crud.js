@@ -1,7 +1,6 @@
 var request = require('request');
 
-//var base = 'https://' + '127.0.0.1' + ':443/api/v1/crud';
-var base = 'https://demo2.openi-ict.eu:443/api/v1/crud';
+var base = 'https://' + '127.0.0.1' + ':443/api/v1/crud';
 
 function crud(method, uri, body, cb)
 {

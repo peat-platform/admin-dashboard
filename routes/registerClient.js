@@ -19,10 +19,7 @@ router.post('/', function(req, res)
   }
   auth.createClient(req.body.clientname, req.body.cdescription, req.signedCookies.session, function(err, body)
   {
-    res.cookie('cloudlet', body.cloudlet, {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
-    res.cookie('api_key', body.api_key, {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
-    res.cookie('secret', body.secret, {maxAge: 1800000/* 30min */, httpOnly: true, path: '/dashboard', signed: true});
-    res.render('apps');
+    res.redirect('apps');
   });
 });
 
