@@ -56,7 +56,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Authentification check
 app.use('/admin', function(req, res, next){
    console.log(req.path)
-  if(req.signedCookies.session || req.path === '/login') {
+  if(req.signedCookies.session || req.path === '/login' || req.path === '/register') {
     next();
   } else {
     res.redirect('/admin/login');
