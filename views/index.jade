@@ -1,17 +1,11 @@
-extends layout
+extends main-container
 
 block header
 	include ./header-navbar.jade
 
-block sidebar
-	include ./sidebar-menu.jade
-
 block content
-	.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 
-		p Welcome to 	#{title}
-		p Token: 		#{token}
-		p User: 		#{user}
-		p Cloudlet ID: 	#{cloudlet}
-
-		include ./logout.jade
+	p Welcome to 	#{title}
+	p Token: 		#{token}
+	p User: 		#{user}
+	p Cloudlet ID: 	#{cloudlet}

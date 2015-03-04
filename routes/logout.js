@@ -7,7 +7,7 @@ router.post('/', function(req, res)
 {
   if(!req.signedCookies.session)
   {
-    res.redirect('/admin');
+    res.redirect('/');
     return;
   }
   
@@ -20,15 +20,16 @@ router.post('/', function(req, res)
       res.clearCookie('cloudlet', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
       res.clearCookie('cloudletID', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
       res.clearCookie('secret', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
-      res.redirect('/admin');
+      res.redirect('/');
       return;
     }
+    console.log('delete cookie stuff');
     res.clearCookie('session', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
     res.clearCookie('api_key', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
     res.clearCookie('cloudlet', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
     res.clearCookie('cloudletID', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
     res.clearCookie('secret', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
-    res.redirect('/admin');
+    res.redirect('/');
   });
 });
 

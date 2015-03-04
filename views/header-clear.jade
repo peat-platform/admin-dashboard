@@ -18,7 +18,7 @@
       img(src='http://www.openi-ict.eu//wp-content/themes/openi/images/rss.png', alt='RSS Feed')
   hgroup
     h1.site-title
-      a(href='/admin/', title='OPENi', rel='home') OPENi
+      a(href='/user/', title='OPENi', rel='home') OPENi
     // <h2 class="site-description"></h2>
   nav#site-navigation.main-navigation(role='navigation')
     h3.menu-toggle Menu
@@ -26,19 +26,26 @@
     .menu-version1-container
       ul#menu-version1.nav-menu
         li#menu-item-26.menu-item.menu-item-type-post_type.menu-item-object-page.current-menu-item.page_item.page-item-4.current_page_item.menu-item-26
-          a(href='/admin/') #{user}'s Home
-        li#menu-item-211.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-211
-          a(href='/admin/apps') My Apps
-        li#menu-item-21.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-21
-          a(href='/admin/registerClient') Register Client
-        li#menu-item-22.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-21
-          a(href='/user/') ...
-        li#menu-item-25.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-23
-          a(id="btn-logout-nav", href='/#') Logout
+          a(href='http://www.openi-ict.eu/openi-in-a-nutshell/') OPENI IN A NUTSHELL
+          ul.sub-menu
+            li#menu-item-210.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-210
+              a(href='http://www.openi-ict.eu/approach/') APPROACH
+            li#menu-item-209.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-209
+              a(href='http://www.openi-ict.eu/objectives/') OBJECTIVES
+        li#menu-item-26.menu-item.menu-item-type-post_type.menu-item-object-page.current-menu-item.page_item.page-item-4.current_page_item.menu-item-26
+          a(href='http://www.openi-ict.eu/documentation/') DOCUMENTATION
+          ul.sub-menu
+            li#menu-item-216.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-216
+              a(href='http://www.openi-ict.eu/deliverables/') DELIVERABLES
+            li#menu-item-22.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-22
+              a(href='http://www.openi-ict.eu/open-source/') OPEN SOURCE
+        li#menu-item-26.menu-item.menu-item-type-post_type.menu-item-object-page.current-menu-item.page_item.page-item-4.current_page_item.menu-item-26
+          a(href='http://www.openi-ict.eu/partners/') PARTNERS
+        li#menu-item-26.menu-item.menu-item-type-post_type.menu-item-object-page.current-menu-item.page_item.page-item-4.current_page_item.menu-item-26
+          a(href='http://www.openi-ict.eu/category/news/') NEWS
+        li#menu-item-26.menu-item.menu-item-type-post_type.menu-item-object-page.current-menu-item.page_item.page-item-4.current_page_item.menu-item-26
+          a(href='http://www.openi-ict.eu/category/blog/') BLOG
+        li#menu-item-26.menu-item.menu-item-type-post_type.menu-item-object-page.current-menu-item.page_item.page-item-4.current_page_item.menu-item-26
+          a(href='http://www.openi-ict.eu/contact/') CONTACT
   // #site-navigation
-  .header-search
-    form#searchform(role='search', method='get', action='/admin/search')
-      div
-        label.screen-reader-text(for='s') Search for:
-        input#s(type='text', value='', name='s')
-        input#searchsubmit(type='submit', value='Search')
+  

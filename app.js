@@ -69,7 +69,7 @@ app.use('/admin', function(req, res, next){
   if(req.signedCookies.session || req.path === '/login' || req.path === '/register') {
     next();
   } else {
-    res.redirect('/admin/login');
+    res.redirect('/login');
   }
 });
 
