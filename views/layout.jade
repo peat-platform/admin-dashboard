@@ -7,41 +7,38 @@ html(lang="en")
 		meta(name="Fraunhofer FOKUS - FAME" content="OpenI-Dashboard")
 
 		title= "OpenI Dashboard"
-		link(rel='stylesheet', href='/admin/stylesheets/style.css')
-		link(rel='stylesheet', href='/admin/stylesheets/bootstrap.min.css')
-		link(rel='stylesheet', href='/admin/stylesheets/admin.css')
 		link(rel="icon" href="/admin/favicon.ico" type="image/x-icon")
 		link(rel="shortcut icon" href="/admin/favicon.ico" type="image/x-icon")
+
+		<!-- ========================= Cascading Style Sheets ========================= -->
+		link(rel='stylesheet', href='/admin/stylesheets/bootstrap.min.css')
 		link(href='/admin/stylesheets/jquery-ui.min.css', rel='stylesheet', media='screen')
+		link#cptchStylesheet-css(rel='stylesheet', href='http://www.openi-ict.eu/wp-content/plugins/captcha/css/style.css?ver=3.5', type='text/css', media='all')
+		link#contact-form-7-css(rel='stylesheet', href='http://www.openi-ict.eu/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=3.3.2', type='text/css', media='all')
+		link#twentytwelve-fonts-css(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext', type='text/css', media='all')
+		link#twentytwelve-style-css(rel='stylesheet', href='http://www.openi-ict.eu/wp-content/themes/openi/style.css?ver=3.5', type='text/css', media='all')
+		//if lt IE 9
+			link#twentytwelve-ie-css(rel='stylesheet', href='http://www.openi-ict.eu/wp-content/themes/openi/css/ie.css?ver=20121010', type='text/css', media='all')
+		link#easy_table_style-css(rel='stylesheet', href='http://www.openi-ict.eu/wp-content/plugins/easy-table/themes/default/style.css?ver=0.9', type='text/css', media='all')
+		link(rel='stylesheet', href='/admin/stylesheets/style.css')
+		link(rel='stylesheet', href='/admin/stylesheets/admin.css')
 
-	body
-		header
-			<!--  place the Header here  -->
-			block header			
-		section
-			.container-fluid
-				.row
-					#notifications
-					#logout-confirm-dialog.hide
-						form.form-horizontal
-							#logout-confirm-dialog-text(style='text-align: center; padding-top: 30px;')
-								p Are you sure you want to logout?
+	body.home.page.page-id-4.page-template-default.custom-font-enabled
+		#page.hfeed.site
+			header#masthead.site-header(role='banner')
+				<!--  place Header here  -->
+				block header
+			// #masthead
+		<!--  place the Main Container here  -->
+		block main-container							
 
-					<!--  place the Sidebar here  -->
-					block sidebar
-					<!--  place the Content here  -->
-					block content			
-		footer
-			<!--  place the Footer here  -->
-			block footer
-			
-		<!-- Bootstrap core JavaScript ================================================== -->
+		<!-- ========================= JavaScript ========================= -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
-		script(src="/admin/javascripts/bootstrap.min.js")
-		script(src="/admin/javascripts/jquery-ui.min.js")
-		script(src="/admin/javascripts/main.js")
-		script(src="/admin/javascripts/ui/notifications.js")
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		script(src="/admin/javascripts/ie10-viewport-bug-workaround.js")
-
+		script(type='text/javascript', src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+		script(type='text/javascript', src="/admin/javascripts/bootstrap.min.js")
+		script(type='text/javascript', src="/admin/javascripts/jquery-ui.min.js")
+		script(type='text/javascript', src="/admin/javascripts/main.js")
+		script(type='text/javascript', src="/admin/javascripts/ui/notifications.js")
+		script(type='text/javascript', src='http://www.openi-ict.eu/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=3.3.2')
+		script(type='text/javascript', src='http://www.openi-ict.eu/wp-content/themes/openi/js/navigation.js?ver=1.0')
+		

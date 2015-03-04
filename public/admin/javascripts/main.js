@@ -10,9 +10,15 @@ var DASHBOARD = (function() {
     });    
 
     function logout(){
+        var domain = location.host;
+        alert(domain);
         $.ajax({
-            url:"logout",
             type: "POST",
+            url: "/admin/logout",
+        })
+        .done(function( ) {
+            alert('logged out');
+            window.location.href = '/';
         });
     }
 
