@@ -50,3 +50,7 @@ label {
 .row{margin-top: 30px}
 
 .sidebar{top:71px}
+
+#resources_container{
+    width:1070px;
+}

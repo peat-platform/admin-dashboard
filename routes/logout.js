@@ -20,7 +20,7 @@ router.post('/', function(req, res)
       res.clearCookie('cloudlet', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
       res.clearCookie('cloudletID', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
       res.clearCookie('secret', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
-      res.redirect('/');
+      res.redirect('/admin');
       return;
     }
     console.log('delete cookie stuff');
@@ -29,7 +29,7 @@ router.post('/', function(req, res)
     res.clearCookie('cloudlet', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
     res.clearCookie('cloudletID', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
     res.clearCookie('secret', {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});
-    res.redirect('/');
+    res.redirect('/admin');
   });
 });
 
