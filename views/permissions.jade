@@ -1,0 +1,51 @@
+extends layout
+
+block header
+	include ./header-navbar.jade
+
+block sidebar
+	include ./sidebar-menu.jade
+
+block content
+	.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+
+		<div class="column-left" style="float: left; width: 23%;">
+		<h3>Input</h3>
+		<textarea id="inputData"  rows="10" cols="100" placeholder="Paste your permissions object here and click Start Editing. Alternatively paste a list of type or object ids." ></textarea>
+		<input id="startEditing" type="button" value="Start editing >>>" />
+		<br />
+		<br />
+		<br />
+		<br />
+		<input id="setPermissions1" type="button" value="Sample Input Data 1" />
+		</div>
+		<div class="column-center" style="display: inline-block; width: 38%;">
+		<h3 style="margin-left: 5px;">Edit</h3>
+		<div id="editContainer">
+		<div id="introText">
+		This page is designed so that you can easily create an openi permissions file to include in your mobile application. To create follow these steps:
+		<ol>
+		<li>Either paste a permissions object or text containing OPENi type ids in to the input box on the left and click on start editing.</li>
+		<li>The system will automatically extract the type ids and create editable intefaces in the center column</li>
+		<li>Select checkboxes to set access level and type; the final permissions file is updated as you go</li>
+		<li>Click on the 'Persist Permissions' when you are happy with your choices.</li>
+		</ol>
+		</div>
+		</div>
+		</div>
+		<div class="column-right" style="float: right; width: 38%;">
+		<h3>Output</h3>
+		<input id="copyPermissions" type="button" value="Persist Permissions" />
+		</br>
+		<pre id="outputData"></pre>
+		</div>
+
+		<script src="/admin/javascripts/permissions.js"  type="text/javascript"></script>
+		<link rel='stylesheet' href='/admin/stylesheets/permissions.css' type='text/css' media='all'/>
+		<link rel="stylesheet" id="custom-css" href="/wp-content/themes/openi/custom.css" type="text/css" media="all">
+
+		<div id="dialog-modal" title="Basic modal dialog" style="display: none;"></div>
+
+		<input type="hidden" id="session" name="session" value="#{session}">
+		<input type="hidden" id="app_api_key" name="app_api_key" value="#{app_api_key}">
+

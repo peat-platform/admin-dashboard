@@ -17,6 +17,9 @@
     "request": "",
     "ip": "",
     "jsonwebtoken": "",
+    "ejs": "",
+    "jade": "",
+    "consolidate": "",
     "m2node": "OPENi-ict/m2node"
   }
 }

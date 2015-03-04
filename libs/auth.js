@@ -72,7 +72,18 @@ function refreshSession(session, cb)
 
 function createUser(username, password, cb)
 {
-	crud('POST', base + '/users', {'username': username, 'password': password}, null, cb);
+   crud('POST', base + '/users', {'username': username, 'password': password}, null, cb);
+}
+
+function createAppPermissions(session, app_api_key, arr_permissions, arr_types, cb)
+{
+   var data = {
+      "app_api_key" : app_api_key,
+      "permissions" : arr_permissions,
+      "types"       : arr_types
+   }
+
+   crud('POST', base + '/app_permissions', data, session, cb);
 }
 
 module.exports.createClient   = createClient;

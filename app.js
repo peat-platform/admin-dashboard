@@ -4,6 +4,7 @@ var favicon      = require('serve-favicon');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
+var engines      = require('consolidate');
 
 var config = {
    trusted_public_key: '-----BEGIN PUBLIC KEY-----\n'+
@@ -24,6 +25,7 @@ var login          = require('./routes/login');
 var logout         = require('./routes/logout');
 var registerClient = require('./routes/registerClient');
 var apps           = require('./routes/apps');
+var permissions    = require('./routes/permissions');
 
 
 /*****************************
@@ -33,7 +35,16 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+//app.engine('jade', require('jade').__express);
+//app.engine('html', require('ejs').renderFile);
+//
+//app.engine('haml', engines.haml);
+//app.engine('html', engines.hogan);
 app.set('view engine', 'jade');
+
+app.engine('.ejs', require('ejs').renderFile);
+
+//app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -55,7 +66,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Authentification check
 app.use('/admin', function(req, res, next){
-   console.log(req.path)
   if(req.signedCookies.session || req.path === '/login' || req.path === '/register') {
     next();
   } else {
@@ -73,17 +83,8 @@ app.use('/admin/logout',               logout);
 app.use('/admin/dashboard',            index(config));
 app.use('/admin/registerClient',       registerClient);
 app.use('/admin/apps',                 apps);
+app.use('/admin/permissions*',         permissions)
 
-
-//app.use('/register', register);
-//app.use('/login', login);
-//app.use('/logout', logout);
-//
-//app.use('/dashboard', index);
-//
-//app.use('/dashboard/registerClient', registerClient);
-//
-//app.use('/dashboard/apps', apps);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
