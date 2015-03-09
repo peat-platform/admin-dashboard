@@ -80,6 +80,15 @@ $('#copyPermissions').click(function(){
       dataType: 'json',
       success: function (data) {
          console.log(data);
+         if ("update" == data.status){
+            window.location.href = '/admin/permissions/' + app_api_key
+         }
+         else{
+            alert("error " + JSON.stringify(data))
+         }
+      },
+      error: function (data) {
+         alert("error " + JSON.stringify(data))
       }
    });
 

@@ -35,14 +35,10 @@ router.get('/', function(req, res)
                }
             }
 
-            auth.readAppPermissions(req.signedCookies.session, app_api_key, function(err, data){
-
-               res.render('permissions', {user : decoded.user_id,
-                  'c': client,
-                  'p' : data,
-                  'session' : req.signedCookies.session,
-                  'app_api_key' : app_api_key });
-            })
+            res.render('addpermissions', {user : decoded.user_id,
+               'c': client,
+               'session' : req.signedCookies.session,
+               'app_api_key' : app_api_key });
          });
       }
    });

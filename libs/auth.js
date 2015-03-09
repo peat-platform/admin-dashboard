@@ -1,6 +1,7 @@
 var request = require('request');
 
-var base = 'https://' + '127.0.0.1' + ':443/api/v1/auth';
+var shortBase = 'https://' + '127.0.0.1' + ':443';
+var base      = 'https://' + '127.0.0.1' + ':443/api/v1/auth';
 //var base = '/api/v1/auth';
 
 function IsJsonString(str) {
@@ -76,21 +77,17 @@ function createUser(username, password, cb)
    crud('POST', base + '/users', {'username': username, 'password': password}, null, cb);
 }
 
-function createAppPermissions(session, app_api_key, arr_permissions, arr_types, cb)
+function readAppPermissions(session, app_api_key, cb)
 {
-   var data = {
-      "app_api_key" : app_api_key,
-      "permissions" : arr_permissions,
-      "types"       : arr_types
-   }
-
-   crud('POST', base + '/app_permissions', data, session, cb);
+   console.log(shortBase + '/api/v1/app_permissions/' + app_api_key)
+   crud('GET', shortBase + '/api/v1/app_permissions/' + app_api_key, null, session, cb);
 }
 
-module.exports.createClient   = createClient;
-module.exports.readClients    = readClients;
-module.exports.createSession  = createSession;
-module.exports.deleteSession  = deleteSession;
-module.exports.refreshSession = refreshSession;
-module.exports.createUser     = createUser;
-module.exports.base           = base;
+module.exports.createClient       = createClient;
+module.exports.readClients        = readClients;
+module.exports.createSession      = createSession;
+module.exports.deleteSession      = deleteSession;
+module.exports.refreshSession     = refreshSession;
+module.exports.createUser         = createUser;
+module.exports.readAppPermissions = readAppPermissions
+module.exports.base               = base;
