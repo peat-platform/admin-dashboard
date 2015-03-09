@@ -24,6 +24,7 @@ var register       = require('./routes/register');
 var login          = require('./routes/login');
 var logout         = require('./routes/logout');
 var registerClient = require('./routes/registerClient');
+var typesBuilder   = require('./routes/typeBuilder');
 var apps           = require('./routes/apps');
 var permissions    = require('./routes/permissions');
 
@@ -82,6 +83,7 @@ app.use('/login',                      login);
 app.use('/admin/logout',               logout);
 app.use('/admin/dashboard',            index(config));
 app.use('/admin/registerClient',       registerClient);
+app.use('/admin/typeBuilder',          typesBuilder);
 app.use('/admin/apps',                 apps);
 app.use('/admin/permissions*',         permissions)
 
