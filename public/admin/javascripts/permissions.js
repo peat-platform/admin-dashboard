@@ -17,9 +17,16 @@ $('#setPermissions2').click(function(){
 
 
 $('#setPermissions1').click(function(){
-   var data = "t_fd88393b19f7d16d8f04767eeeafbfcb-240  t_546d208a88ec0144c72fe5509925ccb4-192"
+   //var data = "t_fd88393b19f7d16d8f04767eeeafbfcb-240  t_546d208a88ec0144c72fe5509925ccb4-192"
 
-   $("#inputData").val(data);
+   var str = ""
+
+   for (var i in graph_api_mappings){
+      str += i + " "
+   }
+
+   $("#inputData").val(str);
+   $('#startEditing').click()
 })
 
 
@@ -95,7 +102,7 @@ $('#copyPermissions').click(function(){
 })
 
 
-var typeToDiv = function(p){
+var typeToDiv = function(p, name){
 
    var html = '<div class="permInstance" id="instance_' + p.ref + '">'
 
@@ -106,12 +113,18 @@ var typeToDiv = function(p){
       html += '<div class="headingObject">Object <span class="removeFromPerms">Remove</span></div>'
    }
 
+
    if ( objectPatternMatch.test( p.ref ) ){
       html += '<div class="immutable"> ID: ' + p.ref + '</div>'
       html += '<div><input type="checkbox" name="cloudlet_read" value="READ"> read <input type="checkbox" name="cloudlet_update" value="UPDATE"> update <input type="checkbox" name="cloudlet_delete" value="DELETE"> delete</div>'
    }
    else{
       html += '<div class="immutable"> ID: ' + p.ref + ' <span  class="loadTypeDetails">Details</span></div>'
+
+      if (undefined !== name){
+         html += '<div>Graph API Object: <b>' + name + '</b></div>'
+      }
+
       html += '<div>App level <span class="help" title="Requesting app level permissions means that your application will be restricted Cloudlet objects created by that application. It cannot access objects of the same type created by other applications.">?</span></div>'
       html += '<div><input type="checkbox" name="app_create" value="CREATE"> create <input type="checkbox" name="app_read" value="READ"> read <input type="checkbox" name="app_update" value="UPDATE"> update <input type="checkbox" name="app_delete" value="DELETE"> delete</div>'
 
@@ -205,6 +218,27 @@ $('#startEditing').click(function(){
             $('#editContainer').append(typeToDiv(perm))
          }
       }
+
+      var words = raw.split(' ')
+
+      for (var i = 0; i < words.length; i++){
+         var word = words[i]
+
+         if ( undefined !== graph_api_mappings[word]){
+
+            var id = graph_api_mappings[word]
+
+            var perm = {
+               ref  : id,
+               type : 'type'
+            }
+
+            if ($('#instance_' + id ).length === 0) {
+               $('#editContainer').append(typeToDiv(perm, word))
+            }
+         }
+      }
+
 
       parsePermissions()
    }
