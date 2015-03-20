@@ -11,7 +11,7 @@ var config = {
    'MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKT8kGk6ZNo3sC4IIo29leRLVD23T2r0\n'+
    'vWXBEkk2pV42HsxKAmPs789AGHH9XwbGpD7FvrcBWWgb65v32Hg/NGkCAwEAAQ==\n'+
    '-----END PUBLIC KEY-----'
-}
+};
 
 /*****************************
 *       IMPLEMENT ROUTES     *
@@ -29,6 +29,7 @@ var apps           = require('./routes/apps');
 var permissions    = require('./routes/permissions');
 var mockauth       = require('./routes/mockauth');
 var addpermissions = require('./routes/addpermissions');
+var subscriptions  = require('./routes/subscriptions');
 
 
 /*****************************
@@ -87,9 +88,10 @@ app.use('/admin/dashboard',            index(config));
 app.use('/admin/registerClient',       registerClient);
 app.use('/admin/typeBuilder',          typesBuilder);
 app.use('/admin/apps',                 apps);
-app.use('/admin/permissions*',         permissions)
-app.use('/admin/addpermissions*',      addpermissions)
-app.use('/admin/mockauth*',            mockauth)
+app.use('/admin/permissions*',         permissions);
+app.use('/admin/addpermissions*',      addpermissions);
+app.use('/admin/mockauth*',            mockauth);
+app.use('/admin/subscriptions*',       subscriptions);
 
 
 // catch 404 and forward to error handler
