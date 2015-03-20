@@ -20,6 +20,7 @@
     "ejs": "",
     "jade": "",
     "consolidate": "",
+    "uuid":"",
     "m2node": "OPENi-ict/m2node"
   }
 }

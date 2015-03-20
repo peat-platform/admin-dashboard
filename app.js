@@ -27,6 +27,7 @@ var registerClient = require('./routes/registerClient');
 var typesBuilder   = require('./routes/typeBuilder');
 var apps           = require('./routes/apps');
 var permissions    = require('./routes/permissions');
+var mockauth       = require('./routes/mockauth');
 var addpermissions = require('./routes/addpermissions');
 
 
@@ -88,6 +89,7 @@ app.use('/admin/typeBuilder',          typesBuilder);
 app.use('/admin/apps',                 apps);
 app.use('/admin/permissions*',         permissions)
 app.use('/admin/addpermissions*',      addpermissions)
+app.use('/admin/mockauth*',            mockauth)
 
 
 // catch 404 and forward to error handler

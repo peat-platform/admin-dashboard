@@ -1,0 +1,57 @@
+extends main-container
+
+block header
+	include ./header-navbar.jade
+
+block content
+	p
+	h2 App Details
+	p
+	b App Name:
+	| #{c.name}
+	p
+	b Description:
+	| #{c.description}
+	p
+	b API Key:
+	| #{c.api_key}
+	p
+	b Secret Key:
+	| #{c.secret}
+	br
+	br
+	h2 This page lists cloudlet ids and tokens for this client. Click on the Authorise button to persist the clients permissions to the cloudlets.
+	br
+	p
+	hr
+	| Num of Tokens <input type="text" id="total" name="total" value="#{total}">
+	| Persist permissions (Caution, intensive process) <input type="checkbox" id="persist_perms" name="persist_perms">
+	br
+	button(id="reloadPage") Reload
+	br
+	br
+	button(id="downloadTokens") Download Token Mappings File
+	hr
+	p
+
+	each mc in mock_cloudlets
+		p Cloudlet id: #{mc.id}
+		p Token: #{mc.token}
+		br
+		br
+	br
+	hr
+	br
+	br
+	p
+	p Date: #{pe._date_created}
+	p Permissions: <pre>#{JSON.stringify(pe.permissions, null, 2)}</pre>
+	p Types: <pre>#{JSON.stringify(pe.types, null, 2)}</pre>
+	<input type="hidden" id="tokens" name="tokens" value="#{JSON.stringify(mock_cloudlets, null, 2)}">
+	<input type="hidden" id="name" name="name" value="#{c.name}">
+	br
+	hr
+	br
+	br
+	script(type='text/javascript', src="/admin/javascripts/hashes.js")
+

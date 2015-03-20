@@ -79,8 +79,13 @@ function createUser(username, password, cb)
 
 function readAppPermissions(session, app_api_key, cb)
 {
-   console.log(shortBase + '/api/v1/app_permissions/' + app_api_key)
    crud('GET', shortBase + '/api/v1/app_permissions/' + app_api_key, null, session, cb);
+}
+
+
+function persistPermissionsForUserAndClient(auth, perms, cb)
+{
+   crud('POST', shortBase + '/api/v1/permissions', perms.permissions, auth, cb);
 }
 
 module.exports.createClient       = createClient;
@@ -90,4 +95,5 @@ module.exports.deleteSession      = deleteSession;
 module.exports.refreshSession     = refreshSession;
 module.exports.createUser         = createUser;
 module.exports.readAppPermissions = readAppPermissions
+module.exports.persistPermissionsForUserAndClient = persistPermissionsForUserAndClient
 module.exports.base               = base;
