@@ -29,6 +29,7 @@ var apps            = require('./routes/apps');
 var permissions     = require('./routes/permissions');
 var mockauth        = require('./routes/mockauth');
 var addpermissions  = require('./routes/addpermissions');
+var typeRegistry    = require('./routes/typeRegistry')
 var subscriptions   = require('./routes/subscriptions');
 var addSubscription = require('./routes/addSubscription');
 
@@ -94,6 +95,8 @@ app.use('/admin/addpermissions*',      addpermissions);
 app.use('/admin/mockauth*',            mockauth);
 app.use('/admin/subscriptions*',       subscriptions);
 app.use('/admin/addSubscription',      addSubscription);
+app.use('/admin/typeRegistry',         typeRegistry);
+
 
 
 // catch 404 and forward to error handler
