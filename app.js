@@ -20,16 +20,17 @@ var config = {
 var index = require('./routes/index');
 
 // Simple_Auth
-var register       = require('./routes/register');
-var login          = require('./routes/login');
-var logout         = require('./routes/logout');
-var registerClient = require('./routes/registerClient');
-var typesBuilder   = require('./routes/typeBuilder');
-var apps           = require('./routes/apps');
-var permissions    = require('./routes/permissions');
-var mockauth       = require('./routes/mockauth');
-var addpermissions = require('./routes/addpermissions');
-var subscriptions  = require('./routes/subscriptions');
+var register        = require('./routes/register');
+var login           = require('./routes/login');
+var logout          = require('./routes/logout');
+var registerClient  = require('./routes/registerClient');
+var typesBuilder    = require('./routes/typeBuilder');
+var apps            = require('./routes/apps');
+var permissions     = require('./routes/permissions');
+var mockauth        = require('./routes/mockauth');
+var addpermissions  = require('./routes/addpermissions');
+var subscriptions   = require('./routes/subscriptions');
+var addSubscription = require('./routes/addSubscription');
 
 
 /*****************************
@@ -92,6 +93,7 @@ app.use('/admin/permissions*',         permissions);
 app.use('/admin/addpermissions*',      addpermissions);
 app.use('/admin/mockauth*',            mockauth);
 app.use('/admin/subscriptions*',       subscriptions);
+app.use('/admin/addSubscription',      addSubscription);
 
 
 // catch 404 and forward to error handler

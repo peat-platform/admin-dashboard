@@ -1,2 +1,104 @@
 //   Created by dconway on 20/03/15.
 
+extends main-container
+block header
+    include ./header-navbar.jade
+block content
+    #typesmain.wrapper
+        .column-left(style='float: left; width: 23%;')
+            h3 Input
+            | &#x9;
+            div Reference
+            | &#x9;
+            input#inputReference(type='text', placeholder='Type reference')
+            | &#x9;
+            hr
+            | &#x9;
+            div Context Builder:
+            | &#x9;
+            .contextBuilderWrapper
+                input#property_name(type='text', placeholder='property_name')
+                | &#x9;
+                select#type(name='type')
+                    option(value='boolean') boolean
+                    | &#x9;
+                    option(value='int') int
+                    | &#x9;
+                    option(value='string', selected='selected') string
+                    | &#x9;
+                    option(value='float') float
+                    | &#x9;
+                    option(value='url') url
+                    | &#x9;
+                    option(value='attachment') attachment
+                    | &#x9;
+                    option(value='date') date
+                    | &#x9;
+                    option(value='timestamp') timestamp
+                    | &#x9;
+                    option(value='gps') gps
+                    | &#x9;
+                    option(value='url') url
+                    | &#x9;
+                    option(value='hexadecimal') hexadecimal
+                    | &#x9;
+                    option(value='base64') base64
+                    | &#x9;
+                    option(value='base64') base64
+                    | &#x9;
+                    option(value='type') type
+                | &#x9;
+                br
+                | &#x9;
+                input#multiple(type='checkbox', name='multiple', value='multiple')
+                |  multiple
+                | &#x9;
+                br
+                | &#x9;
+                input#required(type='checkbox', name='required', value='required', checked='checked')
+                |  required
+                | &#x9;
+                br
+                | &#x9;
+                input#context_id(placeholder='context', type='text')
+            | &#x9;
+            br
+            | &#x9;
+            input#clearContext(type='button', value='Clear')
+            | &#x9;
+            br
+            | &#x9;
+            input#addUpdateContext(type='button', value='Add to Context >>>')
+            | &#x9;
+            br
+            | &#x9;
+            br
+            | &#x9;
+            br
+            | &#x9;
+            br
+        | &#x9;
+        .column-center(style='display: inline-block; width: 38%;')
+            h3(style='margin-left: 5px;') Context
+            | &#x9;
+            #contextContainer
+                #introText
+                    | Intro
+        | &#x9;
+        .column-right(style='float: right; width: 38%;')
+            div Sample Object
+            | &#x9;
+            pre#outputDataObject.
+
+            | &#x9;
+            h3 Output
+            | &#x9;
+            input#downloadType(type='button', value='Create Type')
+            | &#x9;
+            pre#outputDataType.
+
+        | &#x9;script(type=&apos;text/javascript&apos;, src=&quot;/admin/javascripts/md5.js&quot;)
+        | &#x9;script(type=&apos;text/javascript&apos;, src=&quot;/admin/javascripts/types.js&quot;)
+        | &#x9;link(rel=&apos;stylesheet&apos;, href=&apos;/admin/stylesheets/types.css&apos;)
+        | &#x9;
+        #dialog-modal(title='Basic modal dialog', style='display: none;')
