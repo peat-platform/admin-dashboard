@@ -1,0 +1,18 @@
+//
+   Created by dconway on 27/03/15.
+
+extends main-container
+block header
+    include ./header-navbar.jade
+block content
+    p AGGREGATOR
+    textarea.form-control.aggBody(rows="3",placeholder="{}")
+    button.btn#aggReq Run Request
+
+
+
+    div#dialog-modal(title="Basic modal dialog",style="display: none;")
+    input.hidden(id="session", name="session", value="#{session}")
+    input.hidden(id="app_api_key", name="app_api_key", value="#{app_api_key}")
+
+    script(type='text/javascript', src="/admin/javascripts/aggregator.js")
