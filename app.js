@@ -32,6 +32,7 @@ var addpermissions  = require('./routes/addpermissions');
 var typeRegistry    = require('./routes/typeRegistry')
 var subscriptions   = require('./routes/subscriptions');
 var addSubscription = require('./routes/addSubscription');
+var aggregator      = require('./routes/aggregator');
 
 
 /*****************************
@@ -81,21 +82,22 @@ app.use('/admin', function(req, res, next){
 
 app.use('/', login);
 
-app.use('/admin/register',             register);
-app.use('/admin',                      index(config));
-app.use('/admin/login',                login);
-app.use('/login',                      login);
-app.use('/admin/logout',               logout);
-app.use('/admin/dashboard',            index(config));
-app.use('/admin/registerClient',       registerClient);
-app.use('/admin/typeBuilder',          typesBuilder);
-app.use('/admin/apps',                 apps);
-app.use('/admin/permissions*',         permissions);
-app.use('/admin/addpermissions*',      addpermissions);
-app.use('/admin/mockauth*',            mockauth);
-app.use('/admin/subscriptions*',       subscriptions);
-app.use('/admin/addSubscription',      addSubscription);
-app.use('/admin/typeRegistry',         typeRegistry);
+app.use('/admin/register',          register);
+app.use('/admin',                   index(config));
+app.use('/admin/login',             login);
+app.use('/login',                   login);
+app.use('/admin/logout',            logout);
+app.use('/admin/dashboard',         index(config));
+app.use('/admin/registerClient',    registerClient);
+app.use('/admin/typeBuilder',       typesBuilder);
+app.use('/admin/apps',              apps);
+app.use('/admin/permissions*',      permissions);
+app.use('/admin/addpermissions*',   addpermissions);
+app.use('/admin/mockauth*',         mockauth);
+app.use('/admin/subscriptions*',    subscriptions);
+app.use('/admin/addSubscription',   addSubscription);
+app.use('/admin/typeRegistry',      typeRegistry);
+app.use('/admin/aggregator',        aggregator);
 
 
 
