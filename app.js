@@ -73,7 +73,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Authentification check
 app.use('/admin', function(req, res, next){
-  if(req.signedCookies.session || req.path === '/login' || req.path === '/register') {
+  if(req.signedCookies.session || req.path === '/login' || req.path === '/register' || req.path === '/logout') {
     next();
   } else {
     res.redirect('/admin/login');
@@ -87,6 +87,7 @@ app.use('/admin',                   index(config));
 app.use('/admin/login',             login);
 app.use('/login',                   login);
 app.use('/admin/logout',            logout);
+app.use('logout',                   logout);
 app.use('/admin/dashboard',         index(config));
 app.use('/admin/registerClient',    registerClient);
 app.use('/admin/typeBuilder',       typesBuilder);
