@@ -27,7 +27,6 @@ router.get('/', function(req, res)
             if (err) {
                console.log(err)
             }
-            console.log(body);
 
             res.render('subscriptions', {user : decoded.user_id,
                's': body,
