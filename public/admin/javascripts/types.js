@@ -312,10 +312,7 @@ var validateTypeEntry = function(entry){
    }
    if (undefined === entry['@openi_type'] || -1 === allowedTypes.indexOf(entry['@openi_type'].toLowerCase())) {
 
-      if ( isTypeId(entry["@openi_type"])){
-         subTypes.push(entry["@openi_type"]);
-      }
-      else{
+      if ( !isTypeId(entry["@openi_type"])){
          errs.push(entry['@openi_type'].toLowerCase() + ' is not a valid type.');
       }
    }
