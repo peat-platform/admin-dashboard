@@ -120,6 +120,11 @@ $('#copyPermissions').click(function(){
 })
 
 
+var isTypeId = function(path){
+   return typePatternMatch.test(path);
+};
+
+
 var typeToDiv = function(context){
 
    var html = '<div class="contextInstance">'
@@ -307,10 +312,8 @@ var validateTypeEntry = function(entry){
    }
    if (undefined === entry['@openi_type'] || -1 === allowedTypes.indexOf(entry['@openi_type'].toLowerCase())) {
 
-      type_val = entry['@openi_type'];
-
-      if ( openiUtils.isTypeId(type_val) ){
-         subTypes.push(type_val);
+      if ( isTypeId(entry["@openi_type"])){
+         subTypes.push(entry["@openi_type"]);
       }
       else{
          errs.push(entry['@openi_type'].toLowerCase() + ' is not a valid type.');
@@ -341,6 +344,14 @@ $('#clearContext').click(function(){
    $('#context_id').val('')
 })
 
+$('#type').change(function(){
+   if ("type" === $('#type').val()) {
+      $('#type_id').show();
+   }
+   else{
+      $('#type_id').hide();
+   }
+})
 
 $('#addUpdateContext').click(function(){
 
@@ -354,6 +365,9 @@ $('#addUpdateContext').click(function(){
       "@context_id"    : $('#context_id').val()
    }
 
+   if ("type" === entry["@openi_type"]){
+      entry["@openi_type"] = $('#type_id').val();
+   }
 
    if (validateTypeEntry(entry)){
       entries[entry["@property_name"]] = entry
