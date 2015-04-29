@@ -23,8 +23,10 @@ router.post('/', function(req, res)
   {
     if(err)
     {
-      console.error(err);
-      res.redirect(400,'/');
+       if (err == "Error creating entity: exists"){
+          err = "A user with that username already exists, please try another."
+       }
+      res.render('register', {'error' : err });
       return;
     }
 
@@ -32,8 +34,7 @@ router.post('/', function(req, res)
     {
       if(err)
       {
-        console.error(err);
-        res.redirect(400,'/');
+         res.render('register', {'error' : err });
         return;
       }
       res.cookie('session', body.session, {maxAge: 1800000/* 30min */, httpOnly: true, path: '/admin', signed: true});

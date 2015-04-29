@@ -17,7 +17,7 @@ function IsJsonString(str) {
 function crud(method, uri, body, authorization, cb)
 {
 
-   console.log("crud ", method, uri)
+//   console.log("crud ", method, uri)
 	request({
 		method: method,
 		uri: uri,
@@ -26,12 +26,10 @@ function crud(method, uri, body, authorization, cb)
 		strictSSL: false
 	}, function (err, res, body)
 	{
-      console.log("crud err  ",  err  )
-      console.log("crud res  ", res  )
-      console.log("crud body ", body )
 
 		if(body && body.error) {
          err = body.error;
+         cb(err, body);
       }
       else{
          if (IsJsonString(body)){
