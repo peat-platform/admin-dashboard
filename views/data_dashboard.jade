@@ -1,0 +1,24 @@
+extends main-container
+
+block header
+	include ./header-navbar.jade
+
+block content
+	<div id="typesmain" class="wrapper">
+	<div class="column-left" style="float: left; width: 30%;">
+	ul
+		each cid in cloudlets
+			li
+				a(href="#")= cid
+	</div>
+	<div class="column-middle" style="float: left; width: 30%;">
+	<ul id="id_list"></ul>
+	</div>
+	<div class="column-right" style="float: right; overflow:hidden">
+	<pre id="data"></pre>
+
+	script(type='text/javascript', src="/admin/javascripts/md5.js")
+	script(type='text/javascript', src="/admin/javascripts/data.js")
+	link(rel='stylesheet', href='/admin/stylesheets/data.css')
+
+	<input type="hidden" id="session" name="session" value="#{session}">
