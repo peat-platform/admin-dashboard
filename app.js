@@ -30,6 +30,7 @@ var permissions     = require('./routes/permissions');
 var mockauth        = require('./routes/mockauth');
 var addpermissions  = require('./routes/addpermissions');
 var typeRegistry    = require('./routes/typeRegistry')
+var data            = require('./routes/data')
 var subscriptions   = require('./routes/subscriptions');
 var addSubscription = require('./routes/addSubscription');
 var aggregator      = require('./routes/aggregator');
@@ -90,6 +91,7 @@ app.use('/admin/logout',            logout);
 app.use('logout',                   logout);
 app.use('/admin/dashboard',         index(config));
 app.use('/admin/registerClient',    registerClient);
+app.use('/admin/data',              data);
 app.use('/admin/typeBuilder',       typesBuilder);
 app.use('/admin/apps',              apps);
 app.use('/admin/permissions*',      permissions);

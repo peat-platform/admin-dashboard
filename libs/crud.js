@@ -1,14 +1,16 @@
 var request = require('request');
 
-var base = 'https://' + '127.0.0.1' + ':443/api/v1/crud';
+var base = '/api/v1/crud';
 
-function crud(method, uri, body, cb)
+function crud(method, uri, body, cb, auth)
 {
+   var h = (undefined === auth ) ? {'Authorization': '29f81fe0-3097-4e39-975f-50c4bf8698c7'} : {'Authorization': auth};
+
 	request({
 		method: method,
 		uri: uri,
 		json: body,
-		headers: {'Authorization': '29f81fe0-3097-4e39-975f-50c4bf8698c7'},
+		headers: h,
 		strictSSL: false
 	}, function (err, res, body)
 	{
@@ -16,6 +18,12 @@ function crud(method, uri, body, cb)
 			err = body.error;
 		cb(err, body);
 	});
+}
+
+function readUserCloudlets(auth, cb){
+   var cl = "https://127.0.0.1/api/v1/cloudlets/all_dev"
+
+   crud('GET', cl, null, cb, auth)
 }
 
 function create(db, json, cb)
@@ -66,4 +74,5 @@ module.exports.remove = remove;
 module.exports.patch = patch;
 module.exports.upsert = upsert;
 module.exports.query = query;
+module.exports.readUserCloudlets = readUserCloudlets
 module.exports.base = base;
