@@ -7,7 +7,7 @@ $('.column-left ul li a').click(function(){
 
    selectedCloudlet = id
 
-   $("#id_list").html()
+   $("#id_list").html("")
 
    $.ajax({
       url: '/api/v1/search?cloudlet=' + id + "&id_only=true&limit=100",
@@ -49,7 +49,7 @@ var display_object_function = function(){
       },
       dataType: 'json',
       success: function (data) {
-         console.log(data)
+         //console.log(data)
          //$("#data").html("asdf")
          $("#data").html(JSON.stringify(data, undefined, 2))
       },
