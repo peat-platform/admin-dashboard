@@ -74,5 +74,5 @@ module.exports.remove = remove;
 module.exports.patch = patch;
 module.exports.upsert = upsert;
 module.exports.query = query;
-module.exports.readUserCloudlets = readUserCloudlets
+module.exports.readUserCloudlets = readUserCloudlets;
 module.exports.base = base;
