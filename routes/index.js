@@ -15,7 +15,7 @@ module.exports = function(config) {
          }
          else {
             res.render('index', {
-               title    : 'OPENi-Dashboard',
+               title    : 'OPENi Admin Dashboard',
                ContentHeader  : decoded.user_id.toUpperCase()+'\'s Home',
                token    : req.signedCookies.session.substring(0, 100) + "...",
                user     : decoded.user_id,

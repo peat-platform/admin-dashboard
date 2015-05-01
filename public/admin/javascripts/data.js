@@ -40,7 +40,7 @@ var display_object_function = function(){
    var auth = $("#session").val()
 
    $.ajax({
-      url: '/api/v1/objects/' + selectedCloudlet + id ,
+      url: '/api/v1/objects/' + selectedCloudlet + "/" +id ,
       type: 'GET',
       data: {},
       headers: {
