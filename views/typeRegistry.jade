@@ -1,0 +1,56 @@
+extends main-container
+
+block header
+	include ./header-navbar.jade
+
+block content
+	.well
+		row
+			form.form-inline(id="searchForm", method="POST", action="/admin/typeRegistry", novalidate="novalidate")
+				.form-group(style="width:80%")
+					input(style="width:100%" type="text", class="form-control", id="query", name="query", value="", required="", title="Please enter you username", placeholder="Search OPENi types")
+				button(style="width:20%" type="submit", class="btn btn-success") Search
+		br
+		.dropdown
+			button(type="submit", class="btn btn-info dropdown-toggle", data-toggle="dropdown") 
+				|	Sort by
+				.caret
+			.dropdown-menu(role="menu")
+				li
+					a(role="menuitem") Cloudlets
+					a(role="menuitem") Objects
+
+	|<div class="panel panel-default">
+	|	<!-- Default panel contents -->
+	|	<div class="panel-heading">Type A</div>
+	|	<div class="panel-body">
+	|	    <p>attribute_A, attribute_B etc...</p>
+	|	</div>
+	|	<!-- Table -->
+	|	<table id="table_1" style="display:none;" class="table">
+	thead
+		tr
+			th Name
+			th Multiple
+			th Required
+	tbody
+		tr
+			td AHHH
+			td No
+			td No
+	|	</table>
+	.btn-group(style="width:100%")
+		button(id="1", style="width:50%", type="submit", class="show btn btn-success") Show/Hide
+		button(style="width:50%" type="submit", class="btn btn-info") Modify
+	|</div>
+	.pagination(style="width:100%")
+		li
+			a <
+		- for(var i = 1; i < 20; ++i){
+			li
+				a(href=i)= i
+		- }
+			li
+				a >
+	script(type='text/javascript', src="/admin/javascripts/typeRegistry.js")
+

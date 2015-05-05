@@ -1,0 +1,39 @@
+extends main-container
+
+block header
+	include ./header-navbar.jade
+
+block content
+	p
+	h2 App Details
+	p
+	b App Name:
+	| #{c.name}
+	p
+	b Description:
+	| #{c.description}
+	p
+	b API Key:
+	| #{c.api_key}
+	p
+	b Secret Key:
+	| #{c.secret}
+	br
+	br
+	h2 Permission Details
+	br
+	p Total Permissions: #{p.meta.total_count}
+	p
+	hr
+	a(href="/admin/addpermissions/#{c.api_key}") ADD new App Permissions
+	hr
+	p
+	each pe in p.result
+		p Date: #{pe._date_created}
+		p Permissions: <pre>#{JSON.stringify(pe.permissions, null, 2)}</pre>
+		p Types: <pre>#{JSON.stringify(pe.types, null, 2)}</pre>
+		br
+		hr
+		br
+	br
+
