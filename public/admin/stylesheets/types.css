@@ -3,6 +3,14 @@
     border-radius: 10px;
     margin: 5px;
 }
+
+#contextContainer .contextInstance div.removeContextEntry{
+    float: right;
+    color: #FF0000;
+    cursor: hand;
+    cursor: pointer;
+}
+
 #contextContainer .permInstance div {
     padding: 5px;
 }

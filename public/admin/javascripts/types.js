@@ -127,7 +127,7 @@ var isTypeId = function(path){
 
 var typeToDiv = function(context){
 
-   var html = '<div class="contextInstance">'
+   var html = '<div class="contextInstance"><div class="removeContextEntry"><a href="#">remove</a></div>'
 
    for ( var i in context){
       html += '<div  class="nvp"><span class="nvp_name">' + i + '</span><span class="nvp_value"  nvp_name="' + i + '">: ' + context[i] + '</span></div>'
@@ -137,6 +137,18 @@ var typeToDiv = function(context){
 
    return html
 }
+
+$('#contextContainer').on('click', '.contextInstance div.removeContextEntry', function() {
+
+   var prop_name = $(this).parents('.contextInstance').find('span[nvp_name="@property_name"]').html().replace(": ", "")
+
+   delete entries[prop_name]
+
+   $(this).parents(".contextInstance").remove();
+
+   parseType()
+})
+
 
 
 $('#editContainer').on('click', 'input', function() {
