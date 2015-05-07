@@ -28,8 +28,8 @@ var getMockAuthToken = function(cid, client){
       "cloudlet"         : cid,
       "client_id"        : client.name,
       "context"          : client.cloudlet,
-      "scope"            : "openi",
-      "openi-token-type" : "token",
+      "scope"            : "peat",
+      "peat-token-type" : "token",
       "response_type"    : "id_token"
    };
 

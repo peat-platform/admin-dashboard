@@ -69,7 +69,7 @@ $('#createSub').click(function() {
       },
       dataType: 'json',
       success: function (data) {
-         $("#dialog-modal").html('<pre>OPENi Type created: ' + data['@id'] + '</pre>');
+         $("#dialog-modal").html('<pre>PEAT Type created: ' + data['@id'] + '</pre>');
          $("#dialog-modal").dialog( { "title" : data['@id'] + ' created' } );
          $("#dialog-modal").dialog("open");
       },

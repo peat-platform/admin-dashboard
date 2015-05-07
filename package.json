@@ -1,5 +1,5 @@
  {
-  "name": "openi-ui",
+  "name": "peat-admin-ui",
   "version": "0.0.1",
   "private": true,
   "author": "Sebastian Schmidt <sebastian.schmidt@fokus.fraunhofer.de>",
@@ -21,6 +21,6 @@
     "jade": "",
     "consolidate": "",
     "uuid":"",
-    "m2node": "OPENi-ict/m2node"
+    "m2node": "peat-platform/m2node"
   }
 }
