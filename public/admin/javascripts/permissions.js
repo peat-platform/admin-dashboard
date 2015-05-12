@@ -9,24 +9,69 @@ var apiKeyExtract            = new RegExp(/[a-z,0-9]{32}/gm);
 var types                    = {}
 
 
-$('#setPermissions2').click(function(){
-   var data = [ { "ref": "t_e782776271a49e49d1e1dc3f32ee59b1-535", "type": "type", "access_level": "APP", "access_type": "CREATE" }, { "ref": "t_e782776271a49e49d1e1dc3f32ee59b1-535", "type": "type", "access_level": "APP", "access_type": "READ" }, { "ref": "t_e782776271a49e49d1e1dc3f32ee59b1-535", "type": "type", "access_level": "APP", "access_type": "UPDATE" }, { "ref": "t_e782776271a49e49d1e1dc3f32ee59b1-535", "type": "type", "access_level": "APP", "access_type": "DELETE" }, { "ref": "t_57281a30ce2684932c5810e3d2884be5-247", "type": "type", "access_level": "APP", "access_type": "READ" }, { "ref": "t_57281a30ce2684932c5810e3d2884be5-247", "type": "type", "access_level": "APP", "access_type": "CREATE" }, { "ref": "t_a2c029fe882b2ad2fa630fc9f4556f32-259", "type": "type", "access_level": "APP", "access_type": "READ" }, { "ref": "t_a2c029fe882b2ad2fa630fc9f4556f32-259", "type": "type", "access_level": "APP", "access_type": "CREATE" }, { "ref": "t_11fe95b730bd42950e6b12208a25fe89-341", "type": "type", "access_level": "APP", "access_type": "READ" }, { "ref": "t_11fe95b730bd42950e6b12208a25fe89-341", "type": "type", "access_level": "APP", "access_type": "CREATE" }, { "ref": "00000001-5203-4f5b-df3e-7f06c795775d", "type": "object", "access_level": "CLOUDLET", "access_type": "READ" } ]
+$('#openAddServiceEnablerDialog').click(function(){
 
-   $("#inputData").val(JSON.stringify(data, undefined, 2));
-})
+   //list SEs then
+
+   $.ajax({
+      url: '/admin/ajax/list_service_enablers',
+      type: 'GET',
+      headers: {
+         "Content-Type": "application/json"
+      },
+      dataType: 'json',
+      success: function (data) {
+
+         var html = "<ul>"
+
+         for (var i = 0; i < data.length; i++){
+            html += "<li><input value='Add' type='button' class='addSEButton' id='" + data[i].cloudlet + "' name='"+ data[i].name+"' > " + data[i].name + " : " + data[i].description + "</li>"
+         }
+
+         html += "</ul>"
+
+         $("#dialog-modal").html(html);
+         $("#dialog-modal").dialog( { "title" : ' Please select a service enabler' } );
+         $("#dialog-modal").dialog("open");
+
+         $(".addSEButton").click(function(){
+            var input = $(this)
+            console.log(this);
+            console.log(input);
+            console.log(input.attr("id") + " : " + input.attr("name") );
+            $("#dialog-modal").dialog("close");
+         })
+      },
+      error: function (data) {
+         alert("error " + JSON.stringify(data))
+      }
+   });
+
+
+});
 
 
 $('#setPermissions1').click(function(){
-   //var data = "t_fd88393b19f7d16d8f04767eeeafbfcb-240  t_546d208a88ec0144c72fe5509925ccb4-192"
 
-   var str = ""
+   var html = "<ul>"
 
    for (var i in graph_api_mappings){
-      str += i + " "
+
+      html += "<li><input value='Add' type='button' class='addGraphButton' name='"+ i +"' > " + i + "</li>"
    }
 
-   $("#inputData").val(str);
-   $('#startEditing').click()
+   html += "</ul>"
+
+   $("#dialog-modal").html(html);
+   $("#dialog-modal").dialog( { "title" : ' Please select a service enabler' } );
+   $("#dialog-modal").dialog("open");
+
+   $(".addGraphButton").click(function(){
+      var input = $(this)
+      $("#inputData").val($("#inputData").val() + " " + input.attr("name") );
+      $('#startEditing').click();
+   })
+
 })
 
 
@@ -224,9 +269,9 @@ $('#startEditing').click(function(){
       for (var i = 0; i < words.length; i++){
          var word = words[i]
 
-         if ( undefined !== graph_api_mappings[word]){
+         if ( undefined !== graph_api_mappings['Graph API ' + word]){
 
-            var id = graph_api_mappings[word]
+            var id = graph_api_mappings['Graph API ' + word]
 
             var perm = {
                ref  : id,
@@ -234,7 +279,7 @@ $('#startEditing').click(function(){
             }
 
             if ($('#instance_' + id ).length === 0) {
-               $('#editContainer').append(typeToDiv(perm, word))
+               $('#editContainer').append(typeToDiv(perm, 'Graph API ' + word))
             }
          }
       }
