@@ -350,7 +350,7 @@ $('#clearContext').click(function(){
    $('#type').val('string')
    $('#multiple').prop('checked', false)
    $('#required').prop('checked', 'checked')
-   $('#context_id').val('')
+   $('#context').val('')
 })
 
 $('#type').change(function(){
@@ -383,7 +383,7 @@ $('#addUpdateContext').click(function(){
       $('#contextContainer').append(typeToDiv(entry))
       parseType()
       $('#property_name').val('')
-      $('#context_id').val('')
+      $('#context').val('')
       $('#type_id').val('');
    }
 
