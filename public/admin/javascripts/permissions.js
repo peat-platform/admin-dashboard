@@ -7,6 +7,7 @@ var objectPatternExtract     = new RegExp(/0[a-f,0-9]{7}-[a-f,0-9]{4}-4[a-f,0-9]
 var apiKeyExtract            = new RegExp(/[a-z,0-9]{32}/gm);
 
 var types                    = {}
+var ses                      = {}
 
 
 $('#openAddServiceEnablerDialog').click(function(){
@@ -25,7 +26,7 @@ $('#openAddServiceEnablerDialog').click(function(){
          var html = "<ul>"
 
          for (var i = 0; i < data.length; i++){
-            html += "<li><input value='Add' type='button' class='addSEButton' id='" + data[i].cloudlet + "' name='"+ data[i].name+"' > " + data[i].name + " : " + data[i].description + "</li>"
+            html += "<li><input value='Add' type='button' class='addSEButton' desc='" + data[i].description + "' id='" + data[i].cloudlet + "' name='"+ data[i].name+"' > " + data[i].name + " : " + data[i].description + "</li>"
          }
 
          html += "</ul>"
@@ -36,9 +37,18 @@ $('#openAddServiceEnablerDialog').click(function(){
 
          $(".addSEButton").click(function(){
             var input = $(this)
-            console.log(this);
-            console.log(input);
-            console.log(input.attr("id") + " : " + input.attr("name") );
+
+            var se = {
+               cloudlet    : input.attr("id"),
+               name        : input.attr("name"),
+               description : input.attr("desc")
+            }
+
+            ses[se.name] = se
+
+            $("#inputData").val($("#inputData").val() + " Service_Enabler:" + se.name );
+            $('#startEditing').click();
+
             $("#dialog-modal").dialog("close");
          })
       },
@@ -56,7 +66,6 @@ $('#setPermissions1').click(function(){
    var html = "<ul>"
 
    for (var i in graph_api_mappings){
-
       html += "<li><input value='Add' type='button' class='addGraphButton' name='"+ i +"' > " + i + "</li>"
    }
 
@@ -95,6 +104,7 @@ $('#copyPermissions').click(function(){
 
    var type_ids  = {}
    var type_arrs = []
+   var se_arrs   = []
 
    for ( var i = 0; i < arr_permissions.length; i++){
 
@@ -102,6 +112,10 @@ $('#copyPermissions').click(function(){
          var id = arr_permissions[i].ref
          type_ids[id] = id
       }
+      else if ("service_enabler" === arr_permissions[i].type ){
+         se_arrs[arr_permissions[i].ref] = arr_permissions[i].ref
+      }
+
    }
 
 
@@ -109,17 +123,27 @@ $('#copyPermissions').click(function(){
       type_arrs.push(types[i])
    }
 
+
+   for ( var i in se_arrs ){
+      se_arrs.push(ses[i])
+   }
+
    var match = apiKeyExtract.exec(window.location.href)
 
    var app_api_key = $("#app_api_key").val()
 
    var data = {
-      "app_api_key" : app_api_key,
-      "permissions" : arr_permissions,
-      "types"       : type_arrs
+      "app_api_key"      : app_api_key,
+      "permissions"      : arr_permissions,
+      "types"            : type_arrs,
+      "service_enablers" : se_arrs
    }
 
    var sessionToken = $("#session").val()
+
+   //console.log(JSON.stringify(data, null, 2))
+
+   //return
 
    $.ajax({
       url: '/api/v1/app_permissions/',
@@ -157,11 +181,17 @@ var typeToDiv = function(p, name){
    else if (objectPatternMatch.test( p.ref )){
       html += '<div class="headingObject">Object <span class="removeFromPerms">Remove</span></div>'
    }
+   else {
+      html += '<div class="headingObject">Service Enabler <span class="removeFromPerms">Remove</span></div>'
+   }
 
 
    if ( objectPatternMatch.test( p.ref ) ){
       html += '<div class="immutable"> ID: ' + p.ref + '</div>'
       html += '<div><input type="checkbox" name="cloudlet_read" value="READ"> read <input type="checkbox" name="cloudlet_update" value="UPDATE"> update <input type="checkbox" name="cloudlet_delete" value="DELETE"> delete</div>'
+   }
+   else if (p.type === 'service_enabler'){
+      html += '<div>Service Enabler: <b>' + name + '</b></div>'
    }
    else{
       html += '<div class="immutable"> ID: ' + p.ref + ' <span  class="loadTypeDetails">Details</span></div>'
@@ -269,7 +299,19 @@ $('#startEditing').click(function(){
       for (var i = 0; i < words.length; i++){
          var word = words[i]
 
-         if ( undefined !== graph_api_mappings['Graph API ' + word]){
+         if (0 === word.indexOf( "Service_Enabler:")){
+            word = word.replace("Service_Enabler:", "")
+            var se = ses[word]
+            var perm = {
+               ref  : se.name,
+               type : 'service_enabler'
+            }
+
+            if ($('#instance_' + se.name ).length === 0) {
+               $('#editContainer').append(typeToDiv(perm, se.name))
+            }
+         }
+         else if ( undefined !== graph_api_mappings['Graph API ' + word]){
 
             var id = graph_api_mappings['Graph API ' + word]
 
@@ -378,26 +420,37 @@ var parsePermissions = function(){
       var id      = element.prop('id').replace('instance_', '')
       var type    = ( typePatternMatch.test(id ) ) ? 'type' : 'object'
 
-      element.find('input:checked').each(function(){
-         var input = $( this )
-         var name  = input.prop('name')
+      if (undefined !== ses[id]){
 
-         var aLevel = name.split('_')[0].toUpperCase()
-         var aType  = name.split('_')[1].toUpperCase()
-
-         var perm   = {
-            ref          : id,
-            type         : type,
-            access_level : aLevel,
-            access_type  : aType
+         var perm = {
+            ref         : id,
+            type        : "service_enabler"
          }
 
-         perms.push( perm )
-      })
+         perms.push(perm)
+      }
+      else{
+         element.find('input:checked').each(function() {
+            var input = $(this)
+            var name = input.prop('name')
 
+            var aLevel = name.split('_')[0].toUpperCase()
+            var aType = name.split('_')[1].toUpperCase()
+
+            var perm = {
+               ref         : id,
+               type        : type,
+               access_level: aLevel,
+               access_type : aType
+            }
+
+            perms.push(perm)
+         })
+      }
+
+      document.getElementById("outputData").innerHTML = JSON.stringify(perms, undefined, 2);
    })
 
-   document.getElementById("outputData").innerHTML = JSON.stringify(perms, undefined, 2);
 
    retrieveTypes()
 }
