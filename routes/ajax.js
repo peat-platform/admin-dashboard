@@ -7,6 +7,49 @@ var express = require('express');
 var router  = express.Router();
 
 
+
+router.get('/list_types', function(req, res)
+{
+   jwt.verify(req.signedCookies.session, config.key.verify, function (err, decoded) {
+
+      if (err) {
+         res.render('/admin/login')
+      }
+      else {
+         var selectedCloudlet = req.query.selected
+
+         var start = encodeURIComponent("[\"" + decoded.cloudlet + "\", \"" + selectedCloudlet + "\"]")
+         var end   = encodeURIComponent("[\"" + decoded.cloudlet + "\", \"" + selectedCloudlet + "^\"]")
+
+         var view_url = 'http://localhost:8092/objects/_design/objects_views/_view/object_by_third_party_type?startkey=' + start + '&endkey=' + end + '&group_level=3&stale=false&limit=100'
+
+         crud.get(view_url, function(err, body){
+
+            if (undefined !== err && null !== err){
+
+               res.setHeader('Content-Type', 'application/json');
+               res.end({"error": err});
+            }
+            else{
+
+               var arr = []
+
+               var body = JSON.parse(body)
+
+               for (var i = 0; i < body.rows.length; i++){
+                  arr.push(body.rows[i].key[2])
+               }
+
+               res.setHeader('Content-Type', 'application/json');
+               res.end(JSON.stringify(arr));
+            }
+
+         })
+      }
+   })
+
+});
+
 router.get('/list_service_enablers', function(req, res)
 {
 
@@ -14,9 +57,6 @@ router.get('/list_service_enablers', function(req, res)
 
    crud.get(view_url, function(err, body){
 
-      //console.log(">> ", err)
-      //console.log(">> ", body)
-      //console.log(">> ", body.length)
 
       if (undefined !== err && null !== err){
 
