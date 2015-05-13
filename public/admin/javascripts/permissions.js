@@ -44,9 +44,9 @@ $('#openAddServiceEnablerDialog').click(function(){
                description : input.attr("desc")
             }
 
-            ses[se.name] = se
+            ses[se.name.replace(" ", "-")] = se
 
-            $("#inputData").val($("#inputData").val() + " Service_Enabler:" + se.name );
+            $("#inputData").val($("#inputData").val() + " Service_Enabler:" + se.name.replace(" ", "-") );
             $('#startEditing').click();
 
             $("#dialog-modal").dialog("close");
