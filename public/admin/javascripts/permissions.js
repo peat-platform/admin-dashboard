@@ -103,6 +103,7 @@ $('#copyPermissions').click(function(){
    var arr_permissions = JSON.parse($("#outputData").text())
 
    var type_ids  = {}
+   var se_ids  = {}
    var type_arrs = []
    var se_arrs   = []
 
@@ -113,18 +114,16 @@ $('#copyPermissions').click(function(){
          type_ids[id] = id
       }
       else if ("service_enabler" === arr_permissions[i].type ){
-         se_arrs[arr_permissions[i].ref] = arr_permissions[i].ref
+         se_ids[arr_permissions[i].ref.replace(" ", "-")] = arr_permissions[i].ref.replace(" ", "-")
       }
 
    }
-
 
    for ( var i in type_ids ){
       type_arrs.push(types[i])
    }
 
-
-   for ( var i in se_arrs ){
+   for ( var i in se_ids ){
       se_arrs.push(ses[i])
    }
 
@@ -138,6 +137,8 @@ $('#copyPermissions').click(function(){
       "types"            : type_arrs,
       "service_enablers" : se_arrs
    }
+
+//   console.log("data last", data)
 
    var sessionToken = $("#session").val()
 

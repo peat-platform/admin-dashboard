@@ -38,10 +38,13 @@ router.get('/', function(req, res)
             auth.readAppPermissions(req.signedCookies.session, app_api_key, function(err, data){
 
                for (var i = 0; i < data.result.length; i++) {
+
                   var e = data.result[i]
-                  if (e.service_enablers){
+                  if ( undefined !== e.service_enablers && null !== e.service_enablers){
                      for (var j = 0; j < e.service_enablers.length; j++) {
-                        delete data.result[i].service_enablers[j].cloudlet
+                        if (null !== data.result[i].service_enablers[j]){
+                           delete data.result[i].service_enablers[j].cloudlet
+                        }
                      }
                   }
                   else{
