@@ -420,7 +420,7 @@ var parsePermissions = function(){
       var id      = element.prop('id').replace('instance_', '')
       var type    = ( typePatternMatch.test(id ) ) ? 'type' : 'object'
 
-      if (undefined !== ses[id]){
+      if (undefined !== ses[id.replace(" ", "-")]){
 
          var perm = {
             ref         : id,
