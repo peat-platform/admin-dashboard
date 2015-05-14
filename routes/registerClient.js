@@ -25,14 +25,14 @@ router.post('/', function(req, res)
          res.render('/admin/login')
       }
       else {
-         if(!req.body.clientname || !req.body.cdescription) {
+         if(!req.body.clientname || !req.body.cdescription || !req.body.cisSE) {
             // pass a local variable to the view
-            res.render('registerClient', { message: 'Please insert any client name and description before.' }, function(err, html) {
+            res.render('registerClient', { message: 'Please insert a client name and description.' }, function(err, html) {
                res.send(html);
             });
             return;
          }
-         auth.createClient(req.body.clientname, req.body.cdescription, req.signedCookies.session, function(err, body) {
+         auth.createClient(req.body.clientname, req.body.cdescription, req.body.cisSE, req.signedCookies.session, function(err, body) {
             res.redirect('apps');
          });
       }
