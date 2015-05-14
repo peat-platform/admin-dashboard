@@ -2,7 +2,7 @@ var request  = require('request');
 var jwt      = require('jsonwebtoken');
 var crud     = require('../libs/crud');
 var auth     = require('../libs/auth');
-var subs     = require('../libs/subscriptions')
+var subs     = require('../libs/subscriptions');
 var config   = require('../libs/config');
 
 
@@ -13,7 +13,6 @@ var apiKeyExtract = new RegExp(/[a-z,0-9]{32}/m);
 
 router.get('/', function(req, res)
 {
-   //console.log("req", req.signedCookies.session)
 
    jwt.verify(req.signedCookies.session, config.key.verify, function (err, decoded) {
 
@@ -27,11 +26,16 @@ router.get('/', function(req, res)
             if (err) {
                console.log(err)
             }
-
-            res.render('subscriptions', {user : decoded.user_id,
-               's': body,
-               'session' : req.signedCookies.session});
-
+            if(body !== undefined || body !== null){
+               res.render('subscriptions', {user : decoded.user_id,
+                  's': body,
+                  'session' : req.signedCookies.session});
+            }
+            else{
+               res.render('subscriptions', {user : decoded.user_id,
+                  's':[],
+                  'session' : req.signedCookies.session});
+            }
 
          });
       }
