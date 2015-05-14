@@ -25,7 +25,7 @@ router.post('/', function(req, res)
          res.render('/admin/login')
       }
       else {
-         if(!req.body.clientname || !req.body.cdescription || !req.body.cisSE) {
+         if(!req.body.clientname || !req.body.cdescription) {
             // pass a local variable to the view
             res.render('registerClient', { message: 'Please insert a client name and description.' }, function(err, html) {
                res.send(html);
