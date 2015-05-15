@@ -20,7 +20,7 @@ block content
 	| &nbsp; #{c.secret}
 	p
 	b Test Auth Dialog:
-	| &nbsp; <a href="/auth/account?api_key=#{c.api_key}&secret=#{c.secret}&redirectURL=http://localhost.com">/auth/account?api_key=#{c.api_key}&secret=#{c.secret}&redirectURL=http://localhost.com</a>
+	| &nbsp; <a class="testLink" href="/auth/account?api_key=#{c.api_key}&secret=#{c.secret}&redirectURL=http://localhost.com">Test Link (This link has to be opened in another browser or an incognito window otherwise your login here will interfere with the login on the new page.)</a>
 	br
 	br
 	h2 Permission Details
@@ -41,3 +41,4 @@ block content
 		br
 	br
 
+	<script src="/admin/javascripts/list_permissions.js"  type="text/javascript"></script>
