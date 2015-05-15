@@ -18,6 +18,9 @@ block content
 	p
 	b Secret Key:
 	| &nbsp; #{c.secret}
+	p
+	b Test Auth Dialog:
+	| &nbsp; <a href="/auth/account?api_key=#{c.api_key}&secret=#{c.secret}&redirectURL=http://localhost.com">/auth/account?api_key=#{c.api_key}&secret=#{c.secret}&redirectURL=http://localhost.com</a>
 	br
 	br
 	h2 Permission Details
