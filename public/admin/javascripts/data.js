@@ -25,7 +25,7 @@ $('.column-left ul li a').click(function(){
 
          for ( var i = 0; i < data.length; i++){
             var id = data[i]
-            $("#type_id_list").append('<li><a href="#" name="' + id + '">' + id + '</a></li>' )
+            $("#type_id_list").append('<li><a href="#" name="' + id + '"></a></li>' )
          }
 
          $("ul#type_id_list li a").click(list_objects_function)
@@ -94,6 +94,7 @@ var load_real_name_function = function() {
          obj.html(data['@reference'])
       },
       error   : function (data) {
+         obj.html(typeId)
       }
    });
 }
