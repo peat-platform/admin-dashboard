@@ -2,6 +2,7 @@ extends main-container
 
 block header
 	include ./header-navbar.jade
+
 block content
 	p
 	b Your Apps
@@ -24,3 +25,4 @@ block content
 	each s in se
 		h2 App Name: &nbsp; #{s.name}
 		p  Description:&nbsp; #{s.description}
+

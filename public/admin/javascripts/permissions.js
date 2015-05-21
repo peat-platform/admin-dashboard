@@ -44,9 +44,9 @@ $('#openAddServiceEnablerDialog').click(function(){
                description : input.attr("desc")
             }
 
-            ses[se.name.replace(" ", "-")] = se
+            ses[se.name.replace(new RegExp(" ", 'g'), "-")] = se
 
-            $("#inputData").val($("#inputData").val() + " Service_Enabler:" + se.name.replace(" ", "-") );
+            $("#inputData").val($("#inputData").val() + " Service_Enabler:" + se.name.replace(new RegExp(" ", 'g'), "-") );
             $('#startEditing').click();
 
             $("#dialog-modal").dialog("close");
@@ -114,7 +114,7 @@ $('#copyPermissions').click(function(){
          type_ids[id] = id
       }
       else if ("service_enabler" === arr_permissions[i].type ){
-         se_ids[arr_permissions[i].ref.replace(" ", "-")] = arr_permissions[i].ref.replace(" ", "-")
+         se_ids[arr_permissions[i].ref.replace(new RegExp(" ", 'g'), "-")] = arr_permissions[i].ref.replace(new RegExp(" ", 'g'), "-")
       }
 
    }
@@ -138,21 +138,14 @@ $('#copyPermissions').click(function(){
       "service_enablers" : se_arrs
    }
 
-//   console.log("data last", data)
-
    var sessionToken = $("#session").val()
 
-   //console.log(JSON.stringify(data, null, 2))
-
-   //return
-
    $.ajax({
-      url: '/api/v1/app_permissions/',
-      type: 'put',
+      url: '/admin/ajax/persist_app_perms',
+      type: 'PUT',
       data: JSON.stringify(data),
       headers: {
-         "Authorization" : sessionToken,
-         "Content-Type": "application/json"
+         "Content-Type"  : "application/json"
       },
       dataType: 'json',
       success: function (data) {
@@ -174,7 +167,7 @@ $('#copyPermissions').click(function(){
 
 var typeToDiv = function(p, name){
 
-   var html = '<div class="permInstance" id="instance_' + p.ref + '">'
+   var html = '<div class="permInstance" id="instance_' + p.ref.replace(new RegExp(' ', 'g'), '_') + '">'
 
    if ( typePatternMatch.test( p.ref ) ){
       html += '<div class="headingType">Type <span class="removeFromPerms">Remove</span></div>'
@@ -308,13 +301,13 @@ $('#startEditing').click(function(){
                type : 'service_enabler'
             }
 
-            if ($('#instance_' + se.name ).length === 0) {
+            if ($('#instance_' + se.name.replace(new RegExp(' ', 'g'), '_') ).length === 0) {
                $('#editContainer').append(typeToDiv(perm, se.name))
             }
          }
-         else if ( undefined !== graph_api_mappings['Graph API ' + word]){
+         else if ( undefined !== graph_api_mappings[word]){
 
-            var id = graph_api_mappings['Graph API ' + word]
+            var id = graph_api_mappings[word]
 
             var perm = {
                ref  : id,
@@ -322,7 +315,7 @@ $('#startEditing').click(function(){
             }
 
             if ($('#instance_' + id ).length === 0) {
-               $('#editContainer').append(typeToDiv(perm, 'Graph API ' + word))
+               $('#editContainer').append(typeToDiv(perm, word))
             }
          }
       }
@@ -421,10 +414,10 @@ var parsePermissions = function(){
       var id      = element.prop('id').replace('instance_', '')
       var type    = ( typePatternMatch.test(id ) ) ? 'type' : 'object'
 
-      if (undefined !== ses[id.replace(" ", "-")]){
+      if (undefined !== ses[id.replace(new RegExp("_", 'g'), "-")]){
 
          var perm = {
-            ref         : id,
+            ref         : id.replace(new RegExp("_", 'g'), " "),
             type        : "service_enabler"
          }
 

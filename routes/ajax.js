@@ -50,6 +50,38 @@ router.get('/list_types', function(req, res)
 
 });
 
+
+
+router.put('/persist_app_perms', function(req, res)
+{
+   jwt.verify(req.signedCookies.session, config.key.verify, function (err, decoded) {
+
+      if (err) {
+         res.render('/admin/login')
+      }
+      else {
+         var data = req.body
+
+         var path = 'https://localhost:8443/api/v1/app_permissions/'
+
+         crud.crud("PUT", path, data, function(err, body){
+
+            if (err){
+               res.setHeader('Content-Type', 'application/json');
+               res.end(JSON.stringify({error : err }));
+               return false
+            }
+
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(body));
+
+         },req.signedCookies.session)
+      }
+   })
+
+});
+
+
 router.get('/list_service_enablers', function(req, res)
 {
 
@@ -68,13 +100,15 @@ router.get('/list_service_enablers', function(req, res)
 
          var se_list = []
 
-         for (var i = 0; i < body.rows.length; i++){
-            var se = body.rows[i]
-            se_list.push({
-               "name"        : se.value.name,
-               "description" : se.value.description,
-               "cloudlet"    : se.value.cloudlet
-            })
+         if (undefined !== body.rows){
+            for (var i = 0; i < body.rows.length; i++){
+               var se = body.rows[i]
+               se_list.push({
+                  "name"        : se.value.name,
+                  "description" : se.value.description,
+                  "cloudlet"    : se.value.cloudlet
+               })
+            }
          }
 
          res.setHeader('Content-Type', 'application/json');

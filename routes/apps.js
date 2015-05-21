@@ -18,7 +18,6 @@ router.get('/', function(req, res)
 
          auth.readClients(req.signedCookies.session, function(err, body)
          {
-
             var apps = []
             var se   = []
 
