@@ -305,8 +305,8 @@ var validateTypeEntry = function(entry){
    if ( !('@property_name' in  entry) || '' === entry['@property_name']) {
       errs.push('In \'' + name + '\' required parameter @property_name is missing.');
    }
-   if ( !('@context' in  entry) || '' === entry['@context']) {
-      errs.push('In \'' + name + '\' required parameter @context is missing.');
+   if ( !('@description' in  entry) || '' === entry['@description']) {
+      errs.push('In \'' + name + '\' required parameter @description is missing.');
    }
    if ( !( '@data_type' in entry) ) {
       errs.push('In \'' + name + '\' required parameter @data_type is missing.');
@@ -371,7 +371,7 @@ $('#addUpdateContext').click(function(){
       "@data_type"     : $('#type').val(),
       "@multiple"      : $('#multiple').prop('checked'),
       "@required"      : $('#required').prop('checked'),
-      "@context"       : $('#context').val()
+      "@description"   : $('#context').val()
    }
 
    if ("type" === entry["@data_type"]){
