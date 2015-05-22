@@ -288,7 +288,9 @@ $('#startEditing').click(function(){
          }
       }
 
-      var words = raw.split(' ')
+      var words = raw.replace(new RegExp('Graph API ', 'g'), '').split(' ')
+
+      console.log(words)
 
       for (var i = 0; i < words.length; i++){
          var word = words[i]
@@ -305,9 +307,9 @@ $('#startEditing').click(function(){
                $('#editContainer').append(typeToDiv(perm, se.name))
             }
          }
-         else if ( undefined !== graph_api_mappings[word]){
+         else if ( undefined !== graph_api_mappings['Graph API '+ word]){
 
-            var id = graph_api_mappings[word]
+            var id = graph_api_mappings['Graph API '+ word]
 
             var perm = {
                ref  : id,
@@ -315,7 +317,7 @@ $('#startEditing').click(function(){
             }
 
             if ($('#instance_' + id ).length === 0) {
-               $('#editContainer').append(typeToDiv(perm, word))
+               $('#editContainer').append(typeToDiv(perm, 'Graph API '+ word))
             }
          }
       }
