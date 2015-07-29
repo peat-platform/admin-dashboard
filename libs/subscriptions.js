@@ -28,6 +28,12 @@ function getSubscriptions(session, cb)
    crud('GET', base + '/subscription', null, session, cb);
 }
 
+function getPEATSubscriptions(session, cb)
+{
+   crud('GET', base + '/objects?type='+'t_9de6b0dfdd4bb308a33129fb8033b49c-741&order=descending', null, session, cb);
+}
+
 
 module.exports.getSubscriptions = getSubscriptions;
+module.exports.getPEATSubscriptions = getPEATSubscriptions;
 module.exports.base = base;

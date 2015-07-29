@@ -11,26 +11,40 @@ var router  = express.Router();
 
 var apiKeyExtract = new RegExp(/[a-z,0-9]{32}/m);
 
-router.get('/', function(req, res) {
-   //console.log("req", req.signedCookies.session)
+module.exports = function (cmd_args) {
 
-   jwt.verify(req.signedCookies.session, config.key.verify, function (err, decoded) {
+   var admin_dash_public_key = cmd_args.auth_server_public_key.replace(/'/g, "").replace(/"/g, '').replace(/\\n/g, "\n");
 
-      if ( err ) {
-         res.render('/admin/login')
-      }
-      else {
+   return function (req, res, next) {
 
-         res.render('addSubscription', {
-            user     : decoded.user_id,
-            'session': req.signedCookies.session
-         });
+      jwt.verify(req.signedCookies.session, admin_dash_public_key, function (err, decoded) {
+
+         if ( err ) {
+            res.render('/admin/login')
+         }
+         else {
+
+            auth.readClients(req.signedCookies.session, function (err, body) {
+               var apps = [];
+               var se = [];
+
+               if ( undefined !== body.result ) {
+                  for ( var i = 0; i < body.result.length; i++ ) {
+                     var e = body.result[i];
+                     apps.push(e)
+                  }
+               }
+
+               res.render('addSubscription', {
+                  user     : decoded.user_id,
+                  'session': req.signedCookies.session,
+                  'clients': apps
+               });
 
 
-      }
+            })
+         }
 
-   });
-});
-
-
-module.exports = router;
+      });
+   };
+};

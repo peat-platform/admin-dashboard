@@ -3,7 +3,7 @@
  */
 
 
-var subscription
+var subscription = "";
 
 var subToDiv = function(context){
 
@@ -21,18 +21,25 @@ var subToDiv = function(context){
 $('#buildSub').click(function(){
 
    var entry = {
-      "cloudletid"         : $('#cloudletID').val(),
-      "typeid"             : $('#typeID').val(),
-      "objectid"           : $('#objectID').val(),
-      "notification_type"  : $(':selected', '#notifType').attr('key')
+      "@type": "t_9de6b0dfdd4bb308a33129fb8033b49c-741",
+      "@data": {
+         "client_id"          : $(':selected', '#clientID').attr('key'),
+         "peat_type"             : $('#typeID').val(),
+         "notification_type"  : $(':selected', '#notifType').attr('key')
+      }
    };
 
    if ( !$(".endpoint").hasClass('hidden') ) {
-      entry["endpoint"] = $("#endpoint").val();
+      entry['@data']["endpoint"] = $("#endpoint").val();
+   }
+
+   if ( !$(".datafield").hasClass('hidden') ) {
+      entry['@data']["data"] = $("#datafield").val();
    }
 
    subscription=entry;
 
+   $("#createSub").removeClass('hidden');
    //$('#subObject').append(subToDiv(entry))
 
    $("#subObject").html(  JSON.stringify(entry,     undefined, 2));
@@ -41,15 +48,25 @@ $('#buildSub').click(function(){
 
 $('#notifType').click(function() {
 
-   console.log( $('#notifType').val() );
-
    if ($('#notifType').val() === "Android Notification") {
 
       $("#endpointLabel").text("Android Device ID");
-      $(".endpoint").removeClass('hidden')
-}
+      $(".endpoint").removeClass('hidden');
+   }
+   else if($('#notifType').val() === "Email" || $('#notifType').val() === "SMS Text Message"){
+
+      var label = "";
+      ($('#notifType').val() === "Email") ? label = "Email Address" : label = "Phone Number";
+
+      $("#endpointLabel").text(label);
+      $(".endpoint").removeClass('hidden');
+
+      $("#dataLabel").text("Data");
+      $(".datafield").removeClass('hidden');
+   }
    else{
-      $(".endpoint").addClass('hidden')
+      $(".endpoint").addClass('hidden');
+      $(".datafield").addClass('hidden');
    }
 
 });
@@ -57,10 +74,23 @@ $('#notifType').click(function() {
 
 $('#createSub').click(function() {
 
-   var sessionToken = $("#session").val()
+   var sessionToken = $("#session").val();
+
+   console.log(subscription['@data'].client_id);
+   console.log(subscription['@data'].peat_type);
+   console.log(subscription['@data'].peat_type === "");
+
+   if(subscription['@data'].client_id === ""){
+      errorModal('Client ID Required');
+      return
+   }
+   else if(subscription['@data'].peat_type === "" || !isTypeId(subscription['@data'].peat_type)){
+      errorModal('Valid PEAT Type ID Required');
+      return
+   }
 
    $.ajax({
-      url: '/api/v1/subscription',
+      url: '/api/v1/objects',
       type: 'post',
       data: JSON.stringify(subscription),
       headers: {
@@ -81,3 +111,10 @@ $('#createSub').click(function() {
    });
 
 });
+
+
+var errorModal = function(error){
+   $("#dialog-modal").html('<pre>Error:' +  error + '</pre>');
+   $("#dialog-modal").dialog( { "title" : 'Error' } );
+   $("#dialog-modal").dialog("open");
+};

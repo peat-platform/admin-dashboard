@@ -1,14 +1,14 @@
 # admin-dashboard
-OPENi Admin Dashboard
+PEAT Admin Dashboard
 
-openi-admin-dashboard provide a simple dashboard ui to interact with the diffenrent endpoint in the OPENi project.
+peat-admin-dashboard provide a simple dashboard ui to interact with the diffenrent endpoint in the PEAT project.
 The dashboard it's self is a node.js application using express, bootstrap, jade and jquery.
 
 ## Getting started
 
 ### Installing Node.js/NPM
 
-Node.js and NPM must be installed to use openi-admin-dashboard.
+Node.js and NPM must be installed to use peat-admin-dashboard.
 Installation can be done through [NodeJS.org](http://nodejs.org/).
 
 #### How to run this Project
